@@ -17,3 +17,9 @@
     padding: 0px;
     margin: 0px;
 }
+
+#imdb {
+    float: right;
+    width: 20%;
+    border: none;
+}
