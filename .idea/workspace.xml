@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33fab3b7-67d8-4d5a-adc0-84c25e3b7732" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/TheoryOfEverything.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/imdb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/movie_profile.css" afterPath="$PROJECT_DIR$/static/css/movie_profile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/movie_profile.html" afterPath="$PROJECT_DIR$/templates/movie_profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/search.html" afterPath="$PROJECT_DIR$/templates/search.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -60,8 +54,8 @@
       <file leaf-file-name="search.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21980676" vertical-offset="4210" max-vertical-offset="4692">
-              <caret line="253" column="60" selection-start-line="253" selection-start-column="60" selection-end-line="253" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.6714976" vertical-offset="4023" max-vertical-offset="4692">
+              <caret line="253" column="51" selection-start-line="253" selection-start-column="51" selection-end-line="253" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -760,7 +754,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430576131474</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Nazanin's changes added.">
+      <created>1430578640457</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1430578640457</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -805,7 +805,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="friend suggestion sizes fixed, we have 3 suggestions in one view." />
     <MESSAGE value="Check push!!" />
     <MESSAGE value="User Profile like and comment update" />
     <MESSAGE value="chat dialog added" />
@@ -830,7 +829,8 @@
     <MESSAGE value="email confirmation in login and signup fixed, successful message bugs fixed." />
     <MESSAGE value="signup fixed but DD/MM/YYYY checking remained." />
     <MESSAGE value="Chat scroll bug fixed and completed forever :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chat scroll bug fixed and completed forever :D" />
+    <MESSAGE value="Nazanin's changes added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Nazanin's changes added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1219,8 +1219,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/search.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21980676" vertical-offset="4210" max-vertical-offset="4692">
-          <caret line="253" column="60" selection-start-line="253" selection-start-column="60" selection-end-line="253" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.6714976" vertical-offset="4023" max-vertical-offset="4692">
+          <caret line="253" column="51" selection-start-line="253" selection-start-column="51" selection-end-line="253" selection-end-column="51" />
           <folding />
         </state>
       </provider>
