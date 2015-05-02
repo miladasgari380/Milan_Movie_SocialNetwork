@@ -257,14 +257,19 @@
         <script src="{% static 'lib/Semantic/dist/currency-autocomplete.js' %}"></script>
         <script src="{% static 'lib/Semantic/dist/jquery.autocomplete.min.js' %}"></script>
         <script>
+        	var childs = 0;
+            var height = 0;
         	$('button.ui.icon.button').on('click',function(){
 				var msg = $(this).prev().val();
                 if(msg!=""){
                     var msg_div = '<div class="my_content"> <div class="ui content message"> <img class="ui avatar image" src="{% static 'img/Milad.jpg' %}"><div class="header">Milad</div><br/><br/><div class="description"><p>'.concat(msg, '</p></div></div></div>');
             		$(this).parent().prev().append(msg_div);
                     $(this).prev().val("");
-                    console.log($('.chat_window .item .my_content .message').height());
-                    $('.chat_window .item').scrollTop($('.chat_window .item .my_content .message').height());
+                    //console.log($('.chat_window .item').children().eq(childs).height());
+                    height = height + $('.chat_window .item').children().eq(childs).height();
+                    console.log(height);
+                    $('.chat_window .item').scrollTop(height);
+                    childs++;
                 }
             });
         	$('#close').click(function(){
