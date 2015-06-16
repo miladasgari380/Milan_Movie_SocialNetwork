@@ -3,6 +3,12 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 
 admin.autodiscover()
+from django.views.generic.base import TemplateView
+
+__author__ = 'vaio'
+
+from django.conf.urls import patterns, url
+from Moviebook import views
 
 urlpatterns = patterns('',
     # Examples:
@@ -14,8 +20,9 @@ urlpatterns = patterns('',
     url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
     url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='signup'),
     url(r'^post/$', TemplateView.as_view(template_name='post.html'), name='post'),
-    url(r'^user_profile/$', TemplateView.as_view(template_name='user_profile.html'), name="user_profile"),
-    url(r'^users_list/$', TemplateView.as_view(template_name='users_list.html'), name="users_list"),
+    url(r'^user_profile/(\w+)/$', views.user_profile, name="user_profile"),
+    url(r'^followers/(\w+)/$', views.followers, name="user_followers"),
+    url(r'^followings/(\w+)/$', views.followings, name="user_followings"),
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
 

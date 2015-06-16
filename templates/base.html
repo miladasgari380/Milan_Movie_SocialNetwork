@@ -43,9 +43,9 @@
 
                 <div class="ui pointing dropdown link item" tabindex="-1">
                     <i class="dropdown icon" tabindex="0"></i>
-                    <span class="text">Your Name</span>
+                    <span class="text">{{ user.username }}</span>
                     <div class="menu" tabindex="-1">
-                        <a href="{% url 'user_profile' %}"><div class="item">Profile</div></a>
+                        <a href="webproject/user_profile/{{ user.username }}/"><div class="item">Profile</div></a>
                         <div class="item">Settings</div>
                         <div class="divider"></div>
                         <a href="{% url 'login' %}"><div class="item">Logout</div></a>
@@ -140,7 +140,8 @@
 							  <img src="{% static 'img/Nazanin.jpg' %}">
 							</div>
 							<div class="content">
-							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>
+
+{#							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>#}
 							  <!--
                                 <div class="meta">
 								<span class="date">Create in Sep 2014</span>
@@ -166,7 +167,7 @@
 							  <img src="{% static 'img/Milad.jpg' %}">
 							</div>
 							<div class="content">
-							  <a href="{% url 'user_profile' %}" class="header">Milad Asgari</a>
+{#							  <a href="{% url 'user_profile' %}" class="header">Milad Asgari</a>#}
 							 <!--
 							   <div class="meta">
 								<span class="date">Create in Sep 2014</span>
@@ -192,7 +193,7 @@
 							  <img src="{% static 'img/Nazanin.jpg' %}">
 							</div>
 							<div class="content">
-							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>
+{#							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>#}
 							  <!--
                                 <div class="meta">
 								<span class="date">Create in Sep 2014</span>
