@@ -62,7 +62,8 @@
 			</div>
 			<div class="content">
 				<h2 class="header">
-                    Monsters University
+
+                    {{ post.movie_name }}
 
                     <div class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
 
@@ -75,17 +76,17 @@
                     ( 9 / 10 )
                 </h2>
 				<div class="meta">
-					<span>10 April 2015 at 02:05 PM</span>
+					<span>{{ post.date }}</span>
 				</div>
 				<div class="description">
 					<p>
-                        It’s easily the most enjoyable animated film so far this year, one that is visually stunning, wickedly subversive, incredibly funny (Day's character is a hoot), and (at times) lump-in-your-throat emotional.
+                        {{ post.text }}
                     </p>
 				</div>
 				<div class="extra">
                     <div class="right floated author">
       					<img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
-                        <a href = "{% url 'user_profile' %}" > Merlion </a>
+                        <a href = "/user_profile/" > Merlion </a>
                     </div>
                     <a class ="showComments">
                         <span>2 Comments</span>

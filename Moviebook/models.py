@@ -32,7 +32,7 @@ class Post(models.Model):
     text = models.CharField(max_length=1000)
 
     def __str__(self):
-        return str(self.user.first_name + " " + self.user.last_name + " about " + self.movie_name)
+        return str(self.owner.first_name + " " + self.owner.last_name + " about " + self.movie_name.name)
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
