@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/$', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^home/$', views.home, name='home'), #on action
     url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
     url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='signup'),
     url(r'^post/(\d+)/$', views.show_post, name='post'), #nearly done
@@ -25,5 +25,4 @@ urlpatterns = patterns('',
     url(r'^followings/(\w+)/$', views.followings, name="user_followings"), #done
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
-
 )

@@ -93,422 +93,80 @@
     </h2>
     <hr/>
 	<div class="ui items">
-		<div class="item">
-			<div class="image">
-				<img class="tooltip" title="This is my image's tooltip message!" src="{% static 'img/TheImitationGame.jpg'%}">
-			</div>
-			<div class="content">
-				<h2 class="header">
-                    	<span class="postTitle">The Imitation Game</span>
-                    	<div class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
-						<br/>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="half empty star icon"></i>
-                    	(9 / 10)
-                </h2>
-				<div class="meta">
-					<span><a href="{% url 'post' %}"> 28 April 2015 at 10:48 PM </a></span>
-				</div>
-				<div class="description">
-					<p>
-                        This suspenseful drama reveals pieces of its puzzle steadily and slowly, until the final heartrending picture can be seen at last. Remarkably, it comes from a screenwriter who had never had a feature film produced and a director who had never made one in English.
-                    </p>
-				</div>
-				<div class="extra">
-
-                    <div class="right floated author">
-      					<img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
-                        <a href = "{% url 'user_profile' %}" > Merlion </a>
+		{% for post in posts %}
+            <div class="item">
+                <div class="image">
+                    <img class="tooltip" title="This is my image's tooltip message!" src="{% static 'img/TheImitationGame.jpg'%}">
+                </div>
+                <div class="content">
+                    <h2 class="header">
+                            <span class="postTitle">{{ post.movie_name }}</span>
+                            <div class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
+                            <br/>
+                            <i class="star icon"></i>
+                            <i class="star icon"></i>
+                            <i class="star icon"></i>
+                            <i class="star icon"></i>
+                            <i class="half empty star icon"></i>
+                            (9 / 10)
+                    </h2>
+                    <div class="meta">
+                        <span><a href="post/{{ post.id }}"> {{ post.date }} </a></span>
                     </div>
-
-                    <a class="showComments">
-						<span>0 Comments</span>
-                    	<i class ="icon comment"></i>
-                    </a>
-                    <a class="showLikes">
-                    	<span>0 Likes</span>
-                    	<i class="icon thumbs up"></i>
-                    </a>
-                    <!-- Comments -->
-					<div class="ui comments">
-                        <br/>
-						<h3 class="ui dividing header">Comments</h3>
-
-						<form class="ui reply form">
-							<div class="field">
-								<textarea></textarea>
-							</div>
-							<div class="ui blue labeled submit icon button addComment">
-								<i class="icon edit"></i> Add Reply
-							</div>
-						</form>
-					</div>
-
-                    <!--- Likes -->
-					<div class="ui small modal">
-						<i class="close icon"></i>
-						<div class="header">
-							<i class="film icon"></i>
-							Merlion's Post Likes
-						</div>
-						<div class="content">
-							<div class="ui divided list">
-							</div>
-						</div>
-                        <div class="actions">
-            			</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <hr/>
-
-		<div class="item">
-			<div class="image">
-				<img src="{% static 'img/SherlockHolmes.jpg'%}">
-			</div>
-			<div class="content">
-				<h2 class="header">
-                    <span class="postTitle">Adventures of Sherlock Holmes</span>
-
-                    <div class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
-
-                    <br/>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    (10 / 10)
-                </h2>
-				<div class="meta">
-					<span><a href="{% url 'post' %}"> 20 April 2015 at 09:50 AM</a></span>
-				</div>
-				<div class="description">
-					<p>
-                        Basil Rathbone is still probably the best-known Sherlock Holmes, courtesy of his old movies being shown forever on television. But Jeremy Brett is giving the old boy a close chase. For several seasons now, Mr. Brett has been evoking Arthur Conan Doyle's world-renowned detective on public television's ''Mystery'' with an increasingly neurotic reading that may leave a good many Baker Street Irregulars uneasy. But few will be able to deny that the interpretation is diabolically authentic and, yes, memorable.
-                    </p>
-				</div>
-				<div href ="#" class="extra">
-                    <div class="right floated author">
-      					<img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
-                        <a href = "{% url 'user_profile' %}" > Merlion </a>
+                    <div class="description">
+                        <p>
+                            {{ post.text }}
+                        </p>
                     </div>
-                    <a class ="showComments">
-						<span>3 Comments</span>
-                    	<i class ="icon comment"></i>
-                    </a>
-                    <a class="showLikes">
-                    	<span>4 Likes</span>
-                    	<i class="icon thumbs up"></i>
-					</a>
-                    <!-- Comments -->
-					<div class="ui comments">
-                        <br/>
-						<h3 class="ui dividing header">Comments</h3>
-						<div class="comment">
-							<a class="avatar">
-								<img src="{% static 'img/anon.png' %}">
-							</a>
-							<div class="content">
-								<a class="author">Joe Henderson</a>
-								<div class="metadata">
-									<span class="date">5 days ago</span>
-								</div>
-								<div class="text">
-								Dude, this is awesome. Thanks so much
-								</div>
-							</div>
-						</div>
+                    <div class="extra">
 
-						<div class="comment">
-							<a class="avatar">
-								<img src="{% static 'img/anon.png' %}">
-							</a>
-							<div class="content">
-								<a class="author">Matt</a>
-								<div class="metadata">
-									<span class="date">3 days ago</span>
-								</div>
-								<div class="text">
-									I like your post! Thanks ^_^
-								</div>
-							</div>
-						</div>
+                        <div class="right floated author">
+                            <img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
+                            <a href = "user_profile/{{ post.owner.username }}" > {{ post.owner.username }} </a>
+                        </div>
 
+                        <a class="showComments">
+                            <span>0 Comments</span>
+                            <i class ="icon comment"></i>
+                        </a>
+                        <a class="showLikes">
+                            <span>0 Likes</span>
+                            <i class="icon thumbs up"></i>
+                        </a>
+                        <!-- Comments -->
+                        <div class="ui comments">
+                            <br/>
+                            <h3 class="ui dividing header">Comments</h3>
 
-						<div class="comment">
-							<a class="avatar">
-								<img src="{% static 'img/anon.png' %}">
-							</a>
-							<div class="content">
-								<a class="author">Ninoch</a>
-								<div class="metadata">
-									<span class="date">1 days ago</span>
-								</div>
-								<div class="text">
-                                    True Story!
-                                    Wiki: <br/>
-                                    Sherlock Holmes is the name given to the TV series of Sherlock Holmes adaptations produced by British television company Granada Television between 1984 and 1994, with the first two series bearing the title The Adventures Of Sherlock Holmes on screen and being followed by subsequent sub-series bearing the titles of the other short story collections by Arthur Conan Doyle. The series was broadcast on the ITV network in the UK and starred Jeremy Brett as the famous detective. His portrayal remains very popular and is accepted by some as the definitive on-screen version of Sherlock Holmes
-								</div>
-							</div>
-						</div>
+                            <form class="ui reply form">
+                                <div class="field">
+                                    <textarea></textarea>
+                                </div>
+                                <div class="ui blue labeled submit icon button addComment">
+                                    <i class="icon edit"></i> Add Reply
+                                </div>
+                            </form>
+                        </div>
 
-						<form class="ui reply form">
-							<div class="field">
-								<textarea></textarea>
-							</div>
-							<div class="ui blue labeled submit icon button addComment">
-								<i class="icon edit"></i> Add Reply
-							</div>
-						</form>
-					</div>
-
-                    <!--- Likes -->
-					<div class="ui small modal">
-						<i class="close icon"></i>
-						<div class="header">
-							<i class="film icon"></i>
-							Merlion's Post Likes
-						</div>
-						<div class="content">
-							<div class="ui divided list">
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png'%}">
-									<div class="content">
-										<a class="header">Daniel Louise</a>
-									</div>
-								</div>
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png' %}">
-									<div class="content">
-										<a class="header">Stevie Feliciano</a>
-									</div>
-								</div>
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png' %}">
-									<div class="content">
-										<a class="header">Elliot Fu</a>
-									</div>
-								</div>
-
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png' %}">
-									<div class="content">
-										<a class="header">Ninoch</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-    	<hr/>
-
-
-		<div class="item">
-			<div class="image">
-				<img src="{% static 'img/TheoryOfEverything.jpg'%}">
-			</div>
-			<div class="content">
-				<h2 class="header">
-                    	<span class="postTitle"> Theory Of Everything </span>
-                    	<div class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
-						<br/>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-						<i class="star icon"></i>
-                    	(10 / 10)
-                </h2>
-				<div class="meta">
-					<span><a href="{% url 'post' %}"> 13 April 2015 at 10:48 PM</a></span>
-				</div>
-				<div class="description">
-					<p>
-                        A theory of everything (ToE) or final theory, ultimate theory, or master theory is a hypothetical single, all-encompassing, coherent theoretical framework of physics that fully explains and links together all physical aspects of the universe.[1]:6 Finding a ToE is one of the major unsolved problems in physics. Over the past few centuries, two theoretical frameworks have been developed that, as a whole, most closely resemble a ToE. The two theories upon which all modern physics rests are general relativity (GR) and quantum field theory (QFT). GR is a theoretical framework that only focuses on the force of gravity for understanding the universe in regions of both large-scale and high-mass: stars, galaxies, clusters of galaxies, etc. On the other hand, QFT is a theoretical framework that only focuses on three non-gravitational forces for understanding the universe in regions of both small scale and low mass: sub-atomic particles, atoms, molecules, etc. QFT successfully implemented the Standard Model and unified the interactions (so-called Grand Unified Theory) between the three non-gravitational forces: weak, strong, and electromagnetic force.
-                    </p>
-				</div>
-				<div class="extra">
-
-                    <div class="right floated author">
-      					<img class="ui avatar image" src="{% static 'img/Nazanin.jpg' %}">
-                        <a href = "{% url 'user_profile' %}" > Ninoch </a>
+                        <!--- Likes -->
+                        <div class="ui small modal">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <i class="film icon"></i>
+                                Merlion's Post Likes
+                            </div>
+                            <div class="content">
+                                <div class="ui divided list">
+                                </div>
+                            </div>
+                            <div class="actions">
+                            </div>
+                        </div>
                     </div>
-
-                    <a class="showComments">
-						<span>0 Comments</span>
-                    	<i class ="icon comment"></i>
-                    </a>
-                    <a class="showLikes">
-                    	<span>1 Likes</span>
-                    	<i class="icon thumbs up"></i>
-                    </a>
-                    <!-- Comments -->
-					<div class="ui comments">
-                        <br/>
-						<h3 class="ui dividing header">Comments</h3>
-
-						<form class="ui reply form">
-							<div class="field">
-								<textarea></textarea>
-							</div>
-							<div class="ui blue labeled submit icon button addComment">
-								<i class="icon edit"></i> Add Reply
-							</div>
-						</form>
-					</div>
-
-                    <!--- Likes -->
-					<div class="ui small modal">
-						<i class="close icon"></i>
-						<div class="header">
-							<i class="film icon"></i>
-							Ninoch's Post Likes
-						</div>
-						<div class="content">
-							<div class="ui divided list">
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png'%}">
-									<div class="content">
-										<a class="header">Daniel Louise</a>
-									</div>
-								</div>
-							</div>
-						</div>
-                        <div class="actions">
-            			</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <hr/>
-
-		<div class="item">
-			<div class="image">
-				<img src="{% static 'img/MonstersInc.jpg'%}">
-			</div>
-			<div class="content">
-				<h2 class="header">
-                    <span class="postTitle">Monsters University</span>
-
-                    <div class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
-
-                    <br/>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="star icon"></i>
-                    <i class="empty star icon"></i>
-                    (9 / 10)
-                </h2>
-				<div class="meta">
-					<span><a href="{% url 'post' %}"> 10 April 2015 at 02:05 PM</a></span>
-				</div>
-				<div class="description">
-					<p>
-                        It’s easily the most enjoyable animated film so far this year, one that is visually stunning, wickedly subversive, incredibly funny (Day's character is a hoot), and (at times) lump-in-your-throat emotional.
-                    </p>
-				</div>
-				<div class="extra">
-                    <div class="right floated author">
-      					<img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
-                        <a href = "{% url 'user_profile' %}" > Merlion </a>
-                    </div>
-                    <a class ="showComments">
-                        <span>2 Comments</span>
-                    	<i class ="icon comment"></i>
-                    </a>
-                    <a class ="showLikes">
-                        <span>3 Likes</span>
-                    	<i class="icon thumbs up"></i>
-                    </a>
-
-                    <!-- Comments -->
-					<div class="ui comments">
-                        <br/>
-						<h3 class="ui dividing header">Comments</h3>
-						<div class="comment">
-							<a class="avatar">
-								<img src="{% static 'img/anon.png' %}">
-							</a>
-							<div class="content">
-								<a class="author">Joe Henderson</a>
-								<div class="metadata">
-									<span class="date">5 days ago</span>
-								</div>
-								<div class="text">
-								Dude, this is awesome. Thanks so much
-								</div>
-							</div>
-						</div>
-
-						<div class="comment">
-							<a class="avatar">
-								<img src="{% static 'img/anon.png' %}">
-							</a>
-							<div class="content">
-								<a class="author">Matt</a>
-								<div class="metadata">
-									<span class="date">3 days ago</span>
-								</div>
-								<div class="text">
-									I like your post! Thanks ^_^
-								</div>
-							</div>
-						</div>
-
-						<form class="ui reply form">
-							<div class="field">
-								<textarea></textarea>
-							</div>
-							<div class="ui blue labeled submit icon button addComment">
-								<i class="icon edit"></i> Add Reply
-							</div>
-						</form>
-					</div>
-
-                    <!--- Likes -->
-					<div class="ui small modal">
-						<i class="close icon"></i>
-						<div class="header">
-							<i class="film icon"></i>
-							Merlion's Post Likes
-						</div>
-						<div class="content">
-							<div class="ui divided list">
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png'%}">
-									<div class="content">
-										<a class="header">Daniel Louise</a>
-									</div>
-								</div>
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png' %}">
-									<div class="content">
-										<a class="header">Stevie Feliciano</a>
-									</div>
-								</div>
-								<div class="item">
-									<img class="ui avatar image" src="{% static 'img/anon.png' %}">
-									<div class="content">
-										<a class="header">Elliot Fu</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+            <hr/>
+        {% endfor %}
     </div>
 </article>
 {% endblock %}

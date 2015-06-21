@@ -2,6 +2,20 @@ from Moviebook.models import *
 from django.http import Http404
 from django.shortcuts import render
 
+def home(request):
+   # usr = request.user #not sure
+    posts = Post.objects.all().order_by("-date")
+    comments = Comment.objects.all().order_by("-date")
+    # for p in posts:
+    #     comments = Comment.objects.get(post=p).order_by("-date")
+    #     dict[p] = comments
+    return render(request, "home.html", {
+        'posts': posts,
+        # 'comments': dict,
+        'comments': comments,
+    })
+
+
 def show_post(request, post_id):
     post = Post.objects.get(id=post_id)
     # post = Post.objects.filter(owner=usr).get(id)
