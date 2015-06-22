@@ -37,15 +37,18 @@
 					    </div>
 					</div>
 					<h4 class="ui dividing header"></h4>
-					<div id="errors" class="ui error red message">Your username or password is incorrect!</div>
+                    {% if not message == '' %}
+                        <div id="errors" class="ui error red message">{{ message }}</div>
+                    {% endif %}
+
 					<br/>
 					<div id="buttons_login" class="ui large buttons">
 					  <input id = "login" class="ui green button" value="Login" type="submit"/>
 					  <div class="or"></div>
-					  <a href="{% url 'signup' %}"><div class="ui red button">Sign Up</div></a>
+					  <a href="/signup/"><div class="ui red button">Sign Up</div></a>
 					</div>
 				</form>
-				<form id="forget_pass" class="ui form segment face back">
+				<form id="forget_pass" class="ui form segment face back"> {% csrf_token %}
 					<div class="field">
 					    <label for="Email">Email</label>
 					    <div class="ui icon input">
@@ -90,7 +93,7 @@
         	    $('#success_msg').show();
         });
 
-        $('#errors').hide();
+        $('#errors').show();
 {#        $('#login').click(function(event){#}
 {#            console.log($('#Username').val());#}
 {#            console.log($('#Password').val());#}

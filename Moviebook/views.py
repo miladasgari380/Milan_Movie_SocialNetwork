@@ -1,17 +1,32 @@
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from Moviebook.models import *
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth import login as auth_login, authenticate, logout
 from .form import *
 
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
+
+
 def login(request):
+    message = ''
     if request.method == "POST":
+
         form = LoginForm(request.POST)
         if form.is_valid():
+
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
 
-            user = authenticate(username=username, password=password)
+            print(username)
+            print(password)
+
+            # user = authenticate(username=username, password=password)
+            user = authenticate(username = username, password = password)
+            print(user)
 
             if user is not None:
                 if user.is_active:
@@ -19,14 +34,15 @@ def login(request):
                     return redirect('/home/')
                 else:
                     # not active user
-                    pass
+                    message = "This user is deactivated"
             else:
-                #username | password is wrong
-                pass
+                message = "Username or password is wrong"
         else:
             form = LoginForm()
+    form = LoginForm()
     return render(request, "login.html", {
         'form': form,
+        'message': message,
     })
 
 def signup(request):
@@ -59,8 +75,7 @@ def signup(request):
         'message': message,
     })
 
-
-
+@login_required(login_url='/login/')
 def home(request):
     #una e ke followshun mikone
    # usr = request.user #not sure

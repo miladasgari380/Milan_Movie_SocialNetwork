@@ -14,6 +14,7 @@
 	<script src="{% static 'js/jquery.tooltipster.min.js' %}"></script>
 
     <script>
+
     	$(document).ready(function() {
             console.log('salam');
             $('.tooltip').tooltipster();
@@ -101,7 +102,7 @@
                 <div class="content">
                     <h2 class="header">
                             <span class="postTitle">{{ post.movie_name }}</span>
-                            <div class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
+                            <div id="post{{ post.id }}" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
                             <br/>
                             <i class="star icon"></i>
                             <i class="star icon"></i>

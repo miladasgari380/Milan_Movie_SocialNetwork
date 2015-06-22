@@ -25,5 +25,10 @@ urlpatterns = patterns('',
     url(r'^followings/(\w+)/$', views.followings, name="user_followings"), #done
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
+    url(r'^logout/$', views.logout , name='logout'),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 )
+
+# urlpatterns += patterns('',
+#     url(r'^captcha/', include('captcha.urls')),
+# )
