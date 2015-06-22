@@ -2,7 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 
 class Guest(User):
-    birthday = models.DateField("Birthday")
+    birthday = models.DateField(null=True)
+    gender = models.CharField(max_length=10)
+    # forgot_hash = models.CharField(max_length=100, default='')
+
+#####another way####
+# class Guest(models.Model):
+#     user  = models.OneToOneField(User)
+#     .....
+
 
 class Follow(models.Model):
     follower = models.ForeignKey(Guest, related_name="follower")

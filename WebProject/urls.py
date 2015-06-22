@@ -17,12 +17,13 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home/$', views.home, name='home'), #on action
-    url(r'^login/$', TemplateView.as_view(template_name='login.html'), name='login'),
-    url(r'^signup/$', TemplateView.as_view(template_name='signup.html'), name='signup'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^post/(\d+)/$', views.show_post, name='post'), #nearly done
     url(r'^user_profile/(\w+)/$', views.user_profile, name="user_profile"),
     url(r'^followers/(\w+)/$', views.followers, name="user_followers"), #done
     url(r'^followings/(\w+)/$', views.followings, name="user_followings"), #done
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
+    # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 )

@@ -1,6 +1,65 @@
 from Moviebook.models import *
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login as auth_login, authenticate
+from .form import *
+
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    auth_login(request, user)
+                    return redirect('/home/')
+                else:
+                    # not active user
+                    pass
+            else:
+                #username | password is wrong
+                pass
+        else:
+            form = LoginForm()
+    return render(request, "login.html", {
+        'form': form,
+    })
+
+def signup(request):
+    message = ''
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['username'])
+            new_user = Guest() #.objects.create_user(form.cleaned_data['username'],
+                                                 # form.cleaned_data['email'],
+                                                 # form.cleaned_data['password'])
+            new_user.username = form.cleaned_data['username']
+            new_user.password = form.cleaned_data['password']
+            new_user.first_name = form.cleaned_data['first_name']
+            new_user.last_name = form.cleaned_data['last_name']
+            new_user.email = form.cleaned_data['email']
+            new_user.birthday = form.cleaned_data['birthday']
+            new_user.gender = form.cleaned_data['gender']
+            print((form.cleaned_data['birthday'], new_user.birthday))
+            # try:
+            new_user.save()
+            # except:
+                # pass
+            message = "Successfully created"
+    else:
+        form = SignupForm()
+        message = "Unsuccessful creation"
+    return render(request, "signup.html", {
+        'form': form,
+        'message': message,
+    })
+
+
 
 def home(request):
     #una e ke followshun mikone
@@ -61,3 +120,17 @@ def followings(request, user_name):
     return render(request, "users_list.html", {
         'list': temp
     })
+
+#
+# def forgot(request, hash):
+#     if len(Guest.objects.filter(forgot_hash=hash)):
+#         return render(request, 'fucking_template.html')
+#
+#
+# import hashlib
+#
+# def create_hash(request):
+#     email = request.POST['email']
+#     sha1 = hashlib.sha1()
+#     sha1.update('salam')
+#     print(sha1.digest())

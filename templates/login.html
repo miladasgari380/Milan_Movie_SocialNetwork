@@ -18,19 +18,19 @@
 	<body>
 		<div id="flip_container">
 			<div id="fliper">
-				<form id="login_form" class="ui form segment face front">
+				<form id="login_form" class="ui form segment face front" action="/login/" method="post"> {% csrf_token %}
 					<div class="field">
 					    <div class="field">
 					      <label for="Username">Username</label>
 					      <div class="ui icon input">
-					        <input id="Username" placeholder="Username" type="text">
+					        <input name="username" id="Username" placeholder="Username" type="text">
 					        <i class="user icon"></i>
 					      </div>
 					    </div>
 					    <div class="field">
 					      <label for="Password">Password</label>
 					      <div class="ui icon input">
-					        <input id="Password" placeholder="Password" type="password">
+					        <input name="password" id="Password" placeholder="Password" type="password">
 					        <i class="lock icon"></i>
 					      </div>
 					      <em><a id="link" href="#flip_container">forget password?</a></em>
@@ -40,7 +40,7 @@
 					<div id="errors" class="ui error red message">Your username or password is incorrect!</div>
 					<br/>
 					<div id="buttons_login" class="ui large buttons">
-					  <a href="{% url 'home' %}"><div id = "login" class="ui green button">Login!</div></a>
+					  <input id = "login" class="ui green button" value="Login" type="submit"/>
 					  <div class="or"></div>
 					  <a href="{% url 'signup' %}"><div class="ui red button">Sign Up</div></a>
 					</div>
@@ -49,7 +49,7 @@
 					<div class="field">
 					    <label for="Email">Email</label>
 					    <div class="ui icon input">
-					        <input id="Email" placeholder="Email" type="email">
+					        <input name="email" id="Email" placeholder="Email" type="email">
 					        <i class="at icon"></i>
 					    </div>
 					</div>
@@ -91,17 +91,17 @@
         });
 
         $('#errors').hide();
-        $('#login').click(function(event){
-            console.log($('#Username').val());
-            console.log($('#Password').val());
-            if($('#Username').val() != "Test" || $('#Password').val() != "Test")
-            {
-            	$('#errors').show();
-                event.preventDefault();
-            }
-            else
-            	console.log("ok");
-        });
+{#        $('#login').click(function(event){#}
+{#            console.log($('#Username').val());#}
+{#            console.log($('#Password').val());#}
+{#            if($('#Username').val() != "Test" || $('#Password').val() != "Test")#}
+{#            {#}
+{#            	$('#errors').show();#}
+{#                event.preventDefault();#}
+{#            }#}
+{#            else#}
+{#            	console.log("ok");#}
+{#        });#}
 
     </script>
 

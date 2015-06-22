@@ -2,32 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33fab3b7-67d8-4d5a-adc0-84c25e3b7732" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/users/1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/users/2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/users/3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/users/4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/5.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/users/5.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/6.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/img/movies/7.jpg" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\Kamyar.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\Milad.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\MonstersInc.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\Nazanin.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\Nazanin2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\Razeghi.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\SherlockHolmes.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\TheImitationGame.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\TheoryOfEverything.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\movie_Alice.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\movie_nightcrawler.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\Sharif University Of Technology\93-94-2\web\project2\90105537-90109755-project2\static\img\movie_pyramid.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home.html" afterPath="$PROJECT_DIR$/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/user_profile.html" afterPath="$PROJECT_DIR$/templates/user_profile.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Moviebook/form.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Moviebook/models.py" afterPath="$PROJECT_DIR$/Moviebook/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebProject/settings.py" afterPath="$PROJECT_DIR$/WebProject/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/signup.html" afterPath="$PROJECT_DIR$/templates/signup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebProject/urls.py" afterPath="$PROJECT_DIR$/WebProject/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Moviebook/views.py" afterPath="$PROJECT_DIR$/Moviebook/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebProject.iws" />
@@ -51,6 +32,12 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+  </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
@@ -60,43 +47,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="post.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/post.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0769231" vertical-offset="2530" max-vertical-offset="3128">
-              <caret line="152" column="32" selection-start-line="152" selection-start-column="32" selection-end-line="157" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user_profile.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/user_profile.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.766764" vertical-offset="3652" max-vertical-offset="3995">
-              <caret line="159" column="32" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7857143" vertical-offset="1635" max-vertical-offset="6137">
-              <caret line="105" column="106" selection-start-line="105" selection-start-column="106" selection-end-line="105" selection-end-column="106" />
-              <folding>
-                <element signature="n#style#0;n#i#0;n#a#2;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebProject/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="578">
-              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.8" vertical-offset="168" max-vertical-offset="595">
+              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -104,11 +59,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-46.692307" vertical-offset="452" max-vertical-offset="1921">
+              <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Moviebook/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1547">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1683">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -119,8 +84,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Moviebook/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
-              <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1944" max-vertical-offset="2397">
+              <caret line="123" column="0" selection-start-line="123" selection-start-column="1" selection-end-line="135" selection-end-column="26" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -128,11 +93,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/users_list.html">
+      <file leaf-file-name="form.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Moviebook/form.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5" vertical-offset="654" max-vertical-offset="952">
-              <caret line="36" column="68" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/signup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.115385" vertical-offset="562" max-vertical-offset="3094">
+              <caret line="47" column="85" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -166,21 +143,22 @@
         <option value="$PROJECT_DIR$/static/css/home.css" />
         <option value="$PROJECT_DIR$/static/lib/Semantic/dist/currency-autocomplete.js" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
-        <option value="$PROJECT_DIR$/templates/signup.html" />
         <option value="$PROJECT_DIR$/static/css/movie_profile.css" />
         <option value="$PROJECT_DIR$/templates/movie_profile.html" />
-        <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/search.html" />
         <option value="$PROJECT_DIR$/Moviebook/admin.py" />
-        <option value="$PROJECT_DIR$/WebProject/settings.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/users_list.html" />
         <option value="$PROJECT_DIR$/templates/post.html" />
-        <option value="$PROJECT_DIR$/WebProject/urls.py" />
-        <option value="$PROJECT_DIR$/Moviebook/models.py" />
-        <option value="$PROJECT_DIR$/Moviebook/views.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/user_profile.html" />
+        <option value="$PROJECT_DIR$/templates/login.html" />
+        <option value="$PROJECT_DIR$/templates/signup.html" />
+        <option value="$PROJECT_DIR$/WebProject/settings.py" />
+        <option value="$PROJECT_DIR$/Moviebook/form.py" />
+        <option value="$PROJECT_DIR$/Moviebook/views.py" />
+        <option value="$PROJECT_DIR$/Moviebook/models.py" />
+        <option value="$PROJECT_DIR$/WebProject/urls.py" />
       </list>
     </option>
   </component>
@@ -601,7 +579,9 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -892,7 +872,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434954212211</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Home page is under construction, logined user like and comment ajax remained">
+      <created>1434955870674</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1434955870674</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -904,12 +890,12 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2437107" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32626426" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3553459" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1669107" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36867863" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17246597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -965,7 +951,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Home page is under construction, logined user like and comment ajax remained" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -1186,22 +1174,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebProject/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0716846" vertical-offset="0" max-vertical-offset="2006">
-          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5483871" vertical-offset="0" max-vertical-offset="279">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Moviebook/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8530466" vertical-offset="0" max-vertical-offset="340">
@@ -1210,59 +1182,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python34/Lib/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6439791" vertical-offset="6639" max-vertical-offset="8636">
-          <caret line="421" column="8" selection-start-line="421" selection-start-column="8" selection-end-line="421" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Moviebook/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
-          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebProject/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="578">
-          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7857143" vertical-offset="1635" max-vertical-offset="6137">
           <caret line="105" column="106" selection-start-line="105" selection-start-column="106" selection-end-line="105" selection-end-column="106" />
           <folding>
-            <element signature="n#style#0;n#i#0;n#a#2;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#a#2;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Moviebook/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1547">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/users_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5" vertical-offset="654" max-vertical-offset="952">
-          <caret line="36" column="68" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,6 +1196,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.0769231" vertical-offset="2530" max-vertical-offset="3128">
           <caret line="152" column="32" selection-start-line="152" selection-start-column="32" selection-end-line="157" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="36.5" vertical-offset="3652" max-vertical-offset="3995">
+          <caret line="159" column="32" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5" vertical-offset="654" max-vertical-offset="952">
+          <caret line="36" column="68" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -1282,11 +1224,115 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user_profile.html">
+    <entry file="file://$PROJECT_DIR$/WebProject/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.766764" vertical-offset="3652" max-vertical-offset="3995">
-          <caret line="159" column="32" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.55497384" vertical-offset="1607" max-vertical-offset="2023">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/site-packages/django/core/handlers/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1939" max-vertical-offset="4335">
+          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="3316" max-vertical-offset="4539">
+          <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.115385" vertical-offset="562" max-vertical-offset="3094">
+          <caret line="47" column="85" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/site-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33246073" vertical-offset="6996" max-vertical-offset="8636">
+          <caret line="435" column="6" selection-start-line="435" selection-start-column="6" selection-end-line="435" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42618385" vertical-offset="0" max-vertical-offset="359">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/movie_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4811">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/hashlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33147633" vertical-offset="918" max-vertical-offset="3791">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Moviebook/form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Moviebook/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1944" max-vertical-offset="2397">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="1" selection-end-line="135" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Moviebook/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1683">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-46.692307" vertical-offset="452" max-vertical-offset="1921">
+          <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebProject/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8" vertical-offset="168" max-vertical-offset="595">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
