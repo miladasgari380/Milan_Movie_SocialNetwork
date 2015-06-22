@@ -90,7 +90,7 @@
 		<i class="browser icon"></i>
 		{{ user.username }}
 	</h3>
-	<img src = "{% static 'img/Milad.jpg' %}" />
+	<img src="../../static/img/users/{{ user.id }}.jpg">
 	<div class="ui raised segment">
 		<h4>
 		<i class="info circle icon"></i>
@@ -157,7 +157,7 @@
     	{%  for post in posts %}
 		<div class="item">
 			<div class="image">
-				<img src="{% static 'img/TheImitationGame.jpg'%}">
+				<img src="../../static/img/movies/{{ post.movie_name.id }}.jpg">
 			</div>
 			<div class="content">
 				<h2 class="header">
