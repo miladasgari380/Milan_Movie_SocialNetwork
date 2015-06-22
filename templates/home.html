@@ -137,7 +137,19 @@
                         <div class="ui comments">
                             <br/>
                             <h3 class="ui dividing header">Comments</h3>
-
+                            {% for comment in comments %}
+                                {% if comment.post == post %}
+                                <div class="comment">
+                                    <a class="avatar"> <img src="{% static 'img/anon.png' %}"> </a>
+                                    <div class="content">
+                                        <a class="author"> {{ comment.user }} </a> <div class="metadata"> <span class="date">{{ comment.date }}</span> </div>
+                                        <div class="text">
+                                            {{ comment.text }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
                             <form class="ui reply form">
                                 <div class="field">
                                     <textarea></textarea>
@@ -153,10 +165,21 @@
                             <i class="close icon"></i>
                             <div class="header">
                                 <i class="film icon"></i>
-                                Merlion's Post Likes
+                                {{ post.owner }}'s Post Likes
                             </div>
                             <div class="content">
                                 <div class="ui divided list">
+                                {% for like in likes %}
+                                    {% if like.post == post %}
+                                        <div class="item">
+                                            <img class="ui avatar image" src="{% static 'img/anon.png'%}">
+                                            <div class="content">
+                                                <a class="header" href="/user_profile/{{ like.user.username }}/ ">{{ like.user.username }}</a> <!-- ToDo username-> fullname -->
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                {% endfor %}
                                 </div>
                             </div>
                             <div class="actions">

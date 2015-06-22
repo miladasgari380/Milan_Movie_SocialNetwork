@@ -41,7 +41,7 @@ class Comment(models.Model):
     text = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.user.first_name + " " + self.user.last_name + " about " + self.post.movie_name)
+        return str(self.user.first_name + " " + self.user.last_name + " about " + self.post.movie_name.name)
 
 class Like(models.Model):
     user = models.ForeignKey(Guest)

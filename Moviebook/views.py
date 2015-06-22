@@ -3,16 +3,20 @@ from django.http import Http404
 from django.shortcuts import render
 
 def home(request):
+    #una e ke followshun mikone
    # usr = request.user #not sure
     posts = Post.objects.all().order_by("-date")
     comments = Comment.objects.all().order_by("-date")
+    likes = Like.objects.all()
     # for p in posts:
-    #     comments = Comment.objects.get(post=p).order_by("-date")
-    #     dict[p] = comments
+    #     comments = Comment.objects.filter(post=p).order_by("-date")
+    #     dict[p.id] = comments.id
+    # print(dict)
     return render(request, "home.html", {
         'posts': posts,
-        # 'comments': dict,
+        # 'dict': dict,
         'comments': comments,
+        'likes': likes,
     })
 
 
