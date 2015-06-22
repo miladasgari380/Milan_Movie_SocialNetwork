@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33fab3b7-67d8-4d5a-adc0-84c25e3b7732" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home.html" afterPath="$PROJECT_DIR$/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Moviebook/models.py" afterPath="$PROJECT_DIR$/Moviebook/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Moviebook/views.py" afterPath="$PROJECT_DIR$/Moviebook/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebProject.iws" />
@@ -108,8 +105,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4548105" vertical-offset="2020" max-vertical-offset="3400">
-              <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.59183675" vertical-offset="2024" max-vertical-offset="3400">
+              <caret line="131" column="45" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -843,7 +840,13 @@
       <option name="project" value="LOCAL" />
       <updated>1434892892256</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Home page is under construction, logined user like and comment ajax remained">
+      <created>1434954194920</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1434954194920</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -888,7 +891,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="chat dialog fixed, scroll remained" />
     <MESSAGE value="chat optimized, star icon changed to heart, successful reset msg added" />
     <MESSAGE value="Movie tab of search nearly completed, it needs my peer's comments :)" />
     <MESSAGE value="Movie tab of search nearly completed(buges fixed), it needs my partner's comments :)" />
@@ -913,7 +915,8 @@
     <MESSAGE value="Models completed." />
     <MESSAGE value="post page nearly done, just images remained" />
     <MESSAGE value="Home page is under construction, but showing posts is completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Home page is under construction, but showing posts is completed" />
+    <MESSAGE value="Home page is under construction, logined user like and comment ajax remained" />
+    <option name="LAST_COMMIT_MESSAGE" value="Home page is under construction, logined user like and comment ajax remained" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1235,8 +1238,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4548105" vertical-offset="2020" max-vertical-offset="3400">
-          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.59183675" vertical-offset="2024" max-vertical-offset="3400">
+          <caret line="131" column="45" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="45" />
           <folding />
         </state>
       </provider>
