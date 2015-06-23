@@ -31,20 +31,23 @@
             blk.modal("show");
         });
 
-    	$('#follow').click(function(event){
-            var num = parseInt($('#follow').prev().prev().prev().prev().prev().children().eq(0).html());
-            num ++;
-			$('#follow').prev().prev().prev().prev().prev().children().eq(0).html(num);
-            $('#follow').hide();
-            $('#unfollow').show();
-        });
-    	$('#unfollow').click(function(event){
-            var num = parseInt($('#follow').prev().prev().prev().prev().prev().children().eq(0).html());
-            num --;
-			$('#follow').prev().prev().prev().prev().prev().children().eq(0).html(num);
-            $('#unfollow').hide();
-            $('#follow').show();
-        });
+        $('#unfollow').show();
+        $('#follow').show();
+
+{#    	$('#follow').click(function(event){#}
+{#            var num = parseInt($('#follow').prev().prev().prev().prev().prev().children().eq(0).html());#}
+{#            num ++;#}
+{#			$('#follow').prev().prev().prev().prev().prev().children().eq(0).html(num);#}
+{#            $('#follow').hide();#}
+{#            $('#unfollow').show();#}
+{#        });#}
+{#    	$('#unfollow').click(function(event){#}
+{#            var num = parseInt($('#follow').prev().prev().prev().prev().prev().children().eq(0).html());#}
+{#            num --;#}
+{#			$('#follow').prev().prev().prev().prev().prev().children().eq(0).html(num);#}
+{#            $('#unfollow').hide();#}
+{#            $('#follow').show();#}
+{#        });#}
 
     	$('.addComment').click(function(event){
             var txt = $(this).prev().children().eq(0).val();
@@ -136,14 +139,19 @@
 		<span> <a href="/followings/{{ user.username }}/"> {{ following }} </a> </span>
 		<p></p>
 
-        <div id ="follow" class="ui teal button">
-            <i class="plus icon"></i>
-                  Follow
-        </div>
-    	<div id ="unfollow" class="ui red button">
-            <i class="minus icon"></i>
-                  Unfollow
-        </div>
+        {% if not current_user.username == user.username %}
+            {% if current_user.username in follower %}
+            <div id ="follow" class="ui teal button">
+                <i class="plus icon"></i>
+                      Follow
+            </div>
+            {% else %}
+            <div id ="unfollow" class="ui red button">
+                <i class="minus icon"></i>
+                      Unfollow
+            </div>
+            {% endif %}
+        {% endif %}
 
 	</div>
 {% endblock %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 
 class Guest(User):
+    # user = models.OneToOneField(User)
     birthday = models.DateField(null=True)
     gender = models.CharField(max_length=10)
     avatar = models.ImageField(upload_to="img/users/", blank=True, null=True)
@@ -29,6 +30,7 @@ class Movie(models.Model):
     country = models.CharField(max_length=100)
     language = models.CharField(max_length=100)
     IMDB = models.CharField(max_length=100)
+    cover = models.ImageField(upload_to="img/movies/", blank=True, null=True)
 
     def __str__(self):
         return str(self.name)

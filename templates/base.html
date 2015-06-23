@@ -43,9 +43,9 @@
 
                 <div class="ui pointing dropdown link item" tabindex="-1">
                     <i class="dropdown icon" tabindex="0"></i>
-                    <span class="text">{{ user.username }}</span>
+                    <span class="text">{{ current_user.username }}</span>
                     <div class="menu" tabindex="-1">
-                        <a href="/user_profile/{{ user.username }}/"><div class="item">Profile</div></a>
+                        <a href="/user_profile/{{ current_user.username }}/"><div class="item">Profile</div></a>
                         <div class="item">Settings</div>
                         <div class="divider"></div>
                         <a href="/logout/"><div class="item">Logout</div></a>

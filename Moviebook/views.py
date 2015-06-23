@@ -79,6 +79,8 @@ def signup(request):
 
 @login_required(login_url='/login/')
 def home(request):
+    current_user = Guest.objects.get(username=request.user.username)
+
     #una e ke followshun mikone
    # usr = request.user #not sure
     posts = Post.objects.all().order_by("-date")
@@ -90,6 +92,7 @@ def home(request):
     # print(dict)
     return render(request, "home.html", {
         'posts': posts,
+        'current_user': current_user,
         # 'dict': dict,
         'comments': comments,
         'likes': likes,
@@ -104,10 +107,10 @@ def show_post(request, post_id):
     })
 
 def user_profile(request, user_name):
+    current_user = Guest.objects.get(username=request.user.username)
+    # print(current_user.username)
     try:
         usr = Guest.objects.get(username = user_name)
-        print(MEDIA_ROOT)
-        print(BASE_DIR+usr.avatar.url)
         followers = len(Follow.objects.filter(following = usr))
         following = len(Follow.objects.filter(follower = usr))
         posts = Post.objects.filter(owner = usr).order_by("date")
@@ -117,6 +120,7 @@ def user_profile(request, user_name):
 
     return render(request, "user_profile.html", {
         'user': usr,
+        'current_user': current_user,
         'follower': followers,
         'following': following,
         'posts': posts
