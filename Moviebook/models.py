@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, AbstractUser
 class Guest(User):
     birthday = models.DateField(null=True)
     gender = models.CharField(max_length=10)
+    avatar = models.ImageField(upload_to="img/users/", blank=True, null=True)
     # forgot_hash = models.CharField(max_length=100, default='')
 
 #####another way####

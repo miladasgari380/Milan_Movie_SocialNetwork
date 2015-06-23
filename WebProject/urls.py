@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.admin.templatetags.admin_static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from django.contrib import admin
+from WebProject import settings
 
 admin.autodiscover()
 from django.views.generic.base import TemplateView
@@ -25,10 +28,17 @@ urlpatterns = patterns('',
     url(r'^followings/(\w+)/$', views.followings, name="user_followings"), #done
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
-    url(r'^logout/$', views.logout , name='logout'),
+    url(r'^logout/$', views.logout_view , name='logout'),
+    # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
+
 )
 
+urlpatterns += patterns('',
+    url(r'^captcha/', include('captcha.urls')),
+)
+# urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += patterns('',
 #     url(r'^captcha/', include('captcha.urls')),
 # )

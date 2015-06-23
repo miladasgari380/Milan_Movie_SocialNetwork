@@ -19,7 +19,7 @@
 		<div class="container"> 
 		    <div id="sign_up" class="ui form segment">
 				<h1>Register Now</h1>
-			  	<form id="signup_form" class="ui form segment" method="post"> {% csrf_token %}
+			  	<form id="signup_form" class="ui form segment" method="post" enctype="multipart/form-data"> {% csrf_token %}
 				    <div class="two fields">
 				      <div class="field">
 				        <label for="FirstName">First Name</label>
@@ -66,7 +66,10 @@
 				      <label for="passwordConfirm">Password Confirm</label>
 				      <input id="passwordConfirm" type="password" name="confirm_password">
 				    </div>
-
+                    <div class="required field">
+                        <label for="avatar">Upload Photo</label>
+                        <input type="file" name="avatar" accept="image/*">
+                    </div>
                     <div id="buttons_signup" class="ui buttons">
 					   <a href="{% url 'login' %}"><div class="ui red button">Back</div></a>
 					  <div class="or"></div>

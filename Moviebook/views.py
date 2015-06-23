@@ -1,17 +1,22 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from Moviebook.models import *
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate, logout
+from WebProject.settings import MEDIA_ROOT, BASE_DIR
 from .form import *
 
+@login_required(login_url='/login/')
 def logout_view(request):
+    # print("khari")
     logout(request)
+    # print("ridam2")
     return redirect('/login/')
 
 
 def login(request):
+    # print("ridam1")
     message = ''
     if request.method == "POST":
 
@@ -20,14 +25,8 @@ def login(request):
 
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
-
-            print(username)
-            print(password)
-
             # user = authenticate(username=username, password=password)
             user = authenticate(username = username, password = password)
-            print(user)
-
             if user is not None:
                 if user.is_active:
                     auth_login(request, user)
@@ -48,21 +47,24 @@ def login(request):
 def signup(request):
     message = ''
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data['username'])
-            new_user = Guest() #.objects.create_user(form.cleaned_data['username'],
-                                                 # form.cleaned_data['email'],
-                                                 # form.cleaned_data['password'])
-            new_user.username = form.cleaned_data['username']
-            new_user.password = form.cleaned_data['password']
-            new_user.first_name = form.cleaned_data['first_name']
-            new_user.last_name = form.cleaned_data['last_name']
-            new_user.email = form.cleaned_data['email']
-            new_user.birthday = form.cleaned_data['birthday']
-            new_user.gender = form.cleaned_data['gender']
-            print((form.cleaned_data['birthday'], new_user.birthday))
-            # try:
+            # print(request.FILES)
+            new_user = form.save(commit=True)
+            # new_user = Guest() #.objects.create_user(form.cleaned_data['username'],
+            #                                      # form.cleaned_data['email'],
+            #                                      # form.cleaned_data['password'])
+            # new_user.username = form.cleaned_data['username']
+            # # new_user.password = form.cleaned_data['password']
+            # new_user.first_name = form.cleaned_data['first_name']
+            # new_user.last_name = form.cleaned_data['last_name']
+            # new_user.email = form.cleaned_data['email']
+            # new_user.birthday = form.cleaned_data['birthday']
+            # new_user.gender = form.cleaned_data['gender']
+            # # print((form.cleaned_data['birthday'], new_user.birthday))
+            # # try:
+            new_user.set_password(form.cleaned_data['password'])
+            # new_user.avatar = request.FILES['avatar']
             new_user.save()
             # except:
                 # pass
@@ -104,6 +106,8 @@ def show_post(request, post_id):
 def user_profile(request, user_name):
     try:
         usr = Guest.objects.get(username = user_name)
+        print(MEDIA_ROOT)
+        print(BASE_DIR+usr.avatar.url)
         followers = len(Follow.objects.filter(following = usr))
         following = len(Follow.objects.filter(follower = usr))
         posts = Post.objects.filter(owner = usr).order_by("date")

@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Moviebook',
-    # 'captcha',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,3 +112,11 @@ STATICFILES_FINDERS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
+# MEDIA_ROOT = (
+#     os.path.join(BASE_DIR, 'media'),
+# )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = '/../media'
