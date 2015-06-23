@@ -33,7 +33,11 @@ urlpatterns = patterns('',
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 
 )
-
+urlpatterns += patterns('django.views.static',
+        (r'media/(?P<path>.*)',
+        'serve',
+        {'document_root': settings.MEDIA_ROOT}),
+)
 urlpatterns += patterns('',
     url(r'^captcha/', include('captcha.urls')),
 )
