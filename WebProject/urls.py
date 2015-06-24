@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
     url(r'^logout/$', views.logout_view , name='logout'),
     url(r'^follow/$', views.follow, name= 'follow'),
+    url(r'^unfollow/$', views.unfollow, name= 'unfollow'),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 

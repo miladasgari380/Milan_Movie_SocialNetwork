@@ -152,7 +152,7 @@ def followings(request, user_name):
 
 @login_required(login_url='/login/')
 # @csrf_exempt
-def follow(request):
+def unfollow(request):
     print("got it!")
     if request.method == "POST":
         user_name = request.POST['user']
@@ -162,6 +162,22 @@ def follow(request):
         Follow.objects.filter(follower=current_user).filter(following=usr).delete()
         status = 1
         return HttpResponse(json.dumps(status), content_type="application/json")
+
+
+@login_required(login_url='/login/')
+def follow(request):
+    if request.method == "POST":
+        user_name = request.POST['user']
+        print(user_name)
+        usr = Guest.objects.get(username=user_name)
+        current_user = Guest.objects.get(username=request.user.username)
+        f = Follow()
+        f.follower = current_user
+        f.following = usr
+        f.save()
+        status = 1
+        return HttpResponse(json.dumps(status), content_type="application/json")
+
 #
 # def forgot(request, hash):
 #     if len(Guest.objects.filter(forgot_hash=hash)):
