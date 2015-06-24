@@ -161,7 +161,7 @@ def follow(request):
         current_user = Guest.objects.get(username=request.user.username)
         Follow.objects.filter(follower=current_user).filter(following=usr).delete()
         status = 1
-        return HttpResponse(json.dumps(status))
+        return HttpResponse(json.dumps(status), content_type="application/json")
 #
 # def forgot(request, hash):
 #     if len(Guest.objects.filter(forgot_hash=hash)):

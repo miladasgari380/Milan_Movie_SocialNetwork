@@ -11,7 +11,6 @@
     {{ block.super }}
     <script>
         $('.ui.rating').rating();
-    	$('#follow').hide();
         $('.ui.modal').modal({
             detachable: false
         });
@@ -31,9 +30,14 @@
             blk.modal("show");
         });
 
-        $('#unfollow').show();
-        $('#follow').show();
 
+        {% if not current_user.username in follower %}
+        $('#follow').show();
+        $('#unfollow').hide();
+        {% else %}
+        $('#unfollow').show();
+        $('#follow').hide();
+        {% endif %}
 {#    	$('#follow').click(function(event){#}
 {#            var num = parseInt($('#follow').prev().prev().prev().prev().prev().children().eq(0).html());#}
 {#            num ++;#}
@@ -94,16 +98,43 @@
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(json){
-                    alert(json.toString);
+{#                    alert(json.toString);#}
                     $('#unfollow').hide();
+                    $('#follow').show();
+                    var num = parseInt($('#unfollow').parent().prev().prev().prev().prev().prev().children().eq(0).html());
+                    num --;
+                    $('#unfollow').parent().prev().prev().prev().prev().prev().children().eq(0).html(num);
                 },
                 error: function(json,errmsg,err){
                      alert("salam");
                 }
             });
             return false;
+        });
 
-        })
+        $("#follow").on("click",function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/follow/",
+                datatype: "json",
+                data:{
+                    user: "{{ user.username }}",
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(json){
+                    $('#follow').hide();
+                    $('#unfollow').show();
+                    var num = parseInt($('#follow').parent().prev().prev().prev().prev().prev().children().eq(0).html());
+                    num ++;
+                    $('#follow').parent().prev().prev().prev().prev().prev().children().eq(0).html(num);
+                },
+                error: function(json,errmsg,err){
+                     alert("salam");
+                }
+            });
+            return false;
+        });
     </script>
 {% endblock %}
 
@@ -164,17 +195,15 @@
 
         {% if not current_user.username == user.username %}
             <form method="post"> {% csrf_token %}
-            {% if not current_user.username in follower %}
+
             <button id ="follow" class="ui teal button" name="follow" type="submit">
                 <i class="plus icon"></i>
                       Follow
             </button>
-            {% else %}
             <button id ="unfollow" class="ui red button" name="unfollow" type="submit">
                 <i class="minus icon"></i>
                       Unfollow
             </button>
-            {% endif %}
             </form>
         {% endif %}
 
