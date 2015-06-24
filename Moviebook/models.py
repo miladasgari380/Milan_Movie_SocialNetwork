@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 
+
+
 class Guest(User):
     # user = models.OneToOneField(User)
     birthday = models.DateField(null=True)

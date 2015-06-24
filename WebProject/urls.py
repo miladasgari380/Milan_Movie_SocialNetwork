@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home/$', views.home, name='home'), #on action
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', views.login_view, name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^post/(\d+)/$', views.show_post, name='post'), #nearly done
     url(r'^user_profile/(\w+)/$', views.user_profile, name="user_profile"),

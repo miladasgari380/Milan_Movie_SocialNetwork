@@ -17,7 +17,7 @@ def logout_view(request):
     return redirect('/login/')
 
 
-def login(request):
+def login_view(request):
     # print("ridam1")
     message = ''
     if request.method == "POST":
@@ -151,7 +151,6 @@ def followings(request, user_name):
 
 
 @login_required(login_url='/login/')
-# @csrf_exempt
 def unfollow(request):
     print("got it!")
     if request.method == "POST":
