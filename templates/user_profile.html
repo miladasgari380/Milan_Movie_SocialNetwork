@@ -82,6 +82,29 @@
             $(this).parent().parent().children().eq(3).children().eq(1).children().eq(0).html(blk);
         });
     </script>
+    <script>
+        $("#unfollow").on("click",function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/follow/",
+                datatype: "json",
+                data:{
+                    user: "{{ user.username }}",
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(json){
+                    alert(json.toString);
+                    $('#unfollow').hide();
+                },
+                error: function(json,errmsg,err){
+                     alert("salam");
+                }
+            });
+            return false;
+
+        })
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -129,28 +152,30 @@
 			<i class="pointing right icon"></i>
 			Followers
 		</a>
-		<span> <a href="/followers/{{ user.username }}/"> {{ follower }} </a> </span>
+		<span> <a href="/followers/{{ user.username }}/"> {{ follower | length }} </a> </span>
 		<p></p>
 
 		<a class="ui teal ribbon label">
 			<i class="pointing left icon"></i>
 			Following
 		</a>
-		<span> <a href="/followings/{{ user.username }}/"> {{ following }} </a> </span>
+		<span> <a href="/followings/{{ user.username }}/"> {{ following | length}} </a> </span>
 		<p></p>
 
         {% if not current_user.username == user.username %}
-            {% if current_user.username in follower %}
-            <div id ="follow" class="ui teal button">
+            <form method="post"> {% csrf_token %}
+            {% if not current_user.username in follower %}
+            <button id ="follow" class="ui teal button" name="follow" type="submit">
                 <i class="plus icon"></i>
                       Follow
-            </div>
+            </button>
             {% else %}
-            <div id ="unfollow" class="ui red button">
+            <button id ="unfollow" class="ui red button" name="unfollow" type="submit">
                 <i class="minus icon"></i>
                       Unfollow
-            </div>
+            </button>
             {% endif %}
+            </form>
         {% endif %}
 
 	</div>

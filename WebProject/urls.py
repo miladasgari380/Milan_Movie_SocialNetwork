@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^movie_profile/$', TemplateView.as_view(template_name='movie_profile.html'), name="movie_profile"),
     url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
     url(r'^logout/$', views.logout_view , name='logout'),
+    url(r'^follow/$', views.follow, name= 'follow'),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 

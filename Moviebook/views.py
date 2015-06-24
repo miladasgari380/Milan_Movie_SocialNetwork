@@ -1,7 +1,9 @@
+import json
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from Moviebook.models import *
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate, logout
 from WebProject.settings import MEDIA_ROOT, BASE_DIR
@@ -106,23 +108,26 @@ def show_post(request, post_id):
         'post': post,
     })
 
+@login_required(login_url='/login/')
 def user_profile(request, user_name):
     current_user = Guest.objects.get(username=request.user.username)
     # print(current_user.username)
     try:
         usr = Guest.objects.get(username = user_name)
-        followers = len(Follow.objects.filter(following = usr))
-        following = len(Follow.objects.filter(follower = usr))
+        followers = Follow.objects.filter(following = usr)
+        following = Follow.objects.filter(follower = usr)
         posts = Post.objects.filter(owner = usr).order_by("date")
-
+        temp1 = [x.follower.username for x in followers]
+        temp2 = [x.following.username for x in following]
+        print(temp1)
     except Guest.DoesNotExist:
         raise Http404
 
     return render(request, "user_profile.html", {
         'user': usr,
         'current_user': current_user,
-        'follower': followers,
-        'following': following,
+        'follower': temp1,
+        'following': temp2,
         'posts': posts
     })
 
@@ -144,6 +149,19 @@ def followings(request, user_name):
         'list': temp
     })
 
+
+@login_required(login_url='/login/')
+# @csrf_exempt
+def follow(request):
+    print("got it!")
+    if request.method == "POST":
+        user_name = request.POST['user']
+        print(user_name)
+        usr = Guest.objects.get(username=user_name)
+        current_user = Guest.objects.get(username=request.user.username)
+        Follow.objects.filter(follower=current_user).filter(following=usr).delete()
+        status = 1
+        return HttpResponse(json.dumps(status))
 #
 # def forgot(request, hash):
 #     if len(Guest.objects.filter(forgot_hash=hash)):
