@@ -1,4 +1,5 @@
 import json
+import datetime
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
@@ -108,12 +109,42 @@ def show_post(request, post_id):
         'post': post,
     })
 
+
+
+@login_required(login_url='/login/')
+def movie_profile(request, movie_name):
+    current_user = Guest.objects.get(username=request.user.username)
+    try:
+        mv = Movie.objects.get(name=movie_name)
+        staring = Staring.objects.filter(movie=mv)
+        print(mv.summary)
+    except Movie.DoesNotExist:
+        raise Http404
+
+    return render(request, "movie_profile.html", {
+        'movie_name': mv.name,
+        'summary': mv.summary,
+        'release': mv.release,
+        'director': mv.director,
+        'writers': mv.writers,
+        'reviewers_number': mv.reviewers_number,
+        'rate': (mv.rate * 2),
+        'stars': (mv.stars * 2),
+        'country': mv.country,
+        'language': mv.language,
+        'IMDB': mv.IMDB,
+        'cover': mv.cover,
+        'staring': staring,
+        'logined_user': current_user
+    })
+
+
 @login_required(login_url='/login/')
 def user_profile(request, user_name):
     current_user = Guest.objects.get(username=request.user.username)
-    # print(current_user.username)
     try:
         usr = Guest.objects.get(username = user_name)
+        print(usr.first_name)
         followers = Follow.objects.filter(following = usr)
         following = Follow.objects.filter(follower = usr)
         posts = Post.objects.filter(owner = usr).order_by("date")
@@ -162,6 +193,26 @@ def unfollow(request):
         status = 1
         return HttpResponse(json.dumps(status), content_type="application/json")
 
+
+@login_required(login_url='/login/')
+def send_post(request):
+    print("in viiiiiiew")
+    print(request.POST)
+    if request.method == "POST":
+        myowner = Guest.objects.get(username=request.POST['owner'])
+        mymovie_name = Movie.objects.get(name=request.POST['movie_name'])
+        mydate = datetime.datetime.now()
+        mytext = request.POST['text']
+        print(myowner)
+        print(mymovie_name)
+        print(mydate)
+        print(mytext)
+        p = Post(date=mydate, owner=myowner, text=mytext, movie_name=mymovie_name)
+        print("kdhsajhdskah")
+        p.save()
+        print("zende am")
+        status = 1
+        return HttpResponse(json.dumps(status), content_type="application/json")
 
 @login_required(login_url='/login/')
 def follow(request):

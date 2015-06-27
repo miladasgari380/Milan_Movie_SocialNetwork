@@ -13,28 +13,45 @@
     <script>
         $('.ui.rating').rating();
         $('#openModal').click(function(event) {
+
             $(".ui.modal").modal("show");
             $('#openModal').rating('disable');
         });
-        /*
-        $('#openModal').onclick(function(event) {
-            $(".ui.modal").modal("show");
+    </script>
+    <script>
+        $("#AddPost").on("click",function(e){
+            e.preventDefault();
+            alert("clicked");
+            $.ajax({
+                type: "POST",
+                url: "/sendpost/",
+                datatype: "json",
+                data:{
+                    movie_name: "{{ movie_name }}",
+                    owner: "{{ logined_user }}",
+                    text: $('#PostComment').val(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(json){
+                    $('#AddPost').hide();
+                },
+                error: function(json,errmsg,err){
+                     alert("Your post have not send to server.");
+                }
+            });
+            return false;
         });
-*/
     </script>
 {% endblock %}
 
-{% block body %}
-    {{ block.super }}
-{% endblock %}
 
 {% block info %}
-	<img src = "{% static 'img/TheImitationGame.jpg' %}" />
+	<img src = "{{ cover.url }}" />
 	<div class="ui raised segment">
 		<h4>
 		<i class="info circle icon"></i>
 		movie Info
-            <a href="http://www.imdb.com/title/tt2084970/">
+            <a href="{{ IMDB }}">
                 <img id = "imdb" src="{% static 'img/imdb.png' %}" />
             </a>
 		<p></p>
@@ -45,7 +62,7 @@
             Name
 		</a>
 		<p class="infoLabel">
-            The Imitation Game
+            {{ movie_name }}
         </p>
 
 		<a class="ui teal ribbon label">
@@ -53,7 +70,7 @@
             Release year
 		</a>
 		<p class="infoLabel">
-            2014
+            {{ release }}
         </p>
 
 
@@ -62,7 +79,7 @@
 			Director
 		</a>
 		<p class="infoLabel">
-            Morten Tyldum
+            {{ director }}
         </p>
 
         <a class="ui teal ribbon label">
@@ -78,14 +95,14 @@
             <i class="close icon"></i>
             <div class="header">
                 <i class="film icon"></i>
-                The Imitation Game
+                {{ movie_name }}
                 <div class="ui huge rating" data-rating="5" data-max-rating="5"></div> <!--For this, always we have 5star-->
             </div>
             <div class="content">
-                <img id = "movie_pic" src="{% static 'img/TheImitationGame.jpg' %}" />
-                <form id = "comment" class="ui reply form">
+                <img id = "movie_pic" src="{{ cover.url }}" />
+                <form id = "comment" class="ui reply form"> {% csrf_token %}
                     <div class="field">
-                        <textarea placeholder="Write Your Comment here ..."></textarea>
+                        <textarea id = "PostComment" placeholder="Write Your Comment here ..."></textarea>
                     </div>
                 </form>
             </div>
@@ -93,7 +110,7 @@
                 <div id="buttons" class="ui large buttons">
 					  <div class="ui teal button">Cancel</div>
 					  <div class="or"></div>
-					  <div class="ui teal button">Add</div>
+					  <div id = "AddPost" class="ui teal button">Add</div>
 				</div>
             </div>
         </div>
@@ -114,11 +131,22 @@
 
 	</div>
 {% endblock %}
+
 {% block moreinfo %}
     <div>
         <h3>
 		    <i class="film icon"></i>
-            The Imitation Game
+            {{ movie_name }}
+
+            {% for i in "02468" %}
+                {% if stars >= i|add:"2" %}
+                    <i class="star icon"></i>
+                {% elif stars|add:"1" >= i|add:"2" %}
+                    <i class="star half empty icon"></i>
+                {% else %}
+                    <i class="star empty icon"></i>
+                {% endif %}
+            {% endfor %}
         </h3>
 
         <hr/>
@@ -128,7 +156,7 @@
             Summary:
         </h5>
         <p>
-        During World War II, mathematician Alan Turing tries to crack the enigma code with help from fellow mathematicians.
+            {{ summary }}
         </p>
 
         <h5>
@@ -145,7 +173,7 @@
                         Number of reviewers:
                     </td>
                     <td>
-                        243
+                        {{ reviewers_number }}
                     </td>
                 </tr>
 
@@ -154,12 +182,18 @@
                         Average Rating:
                     </td>
                     <td>
-                        <i class="star icon"></i>
-                        <i class="star icon"></i>
-                        <i class="star icon"></i>
-                        <i class="star icon"></i>
-                        <i class="star half empty icon"></i>
-                        ( 8.6 / 10 )
+
+                        {% for i in "02468" %}
+                            {% if rate >= i|add:"2" %}
+                                <i class="star icon"></i>
+                            {% elif rate|add:"1" >= i|add:"2" %}
+                                <i class="star half empty icon"></i>
+                            {% else %}
+                                <i class="star empty icon"></i>
+                            {% endif %}
+                        {% endfor %}
+
+                        ( {{ rate }} / 10 )
                     </td>
                 </tr>
             </tbody>
@@ -176,14 +210,7 @@
                 <tr>
                     <td>Writers:</td>
                     <td>
-                        <div class="ui list">
-                            <div class="item">
-                                Graham Moore
-                            </div>
-                            <div class="item">
-                               Andrew Hodges
-                            </div>
-                        </div>
+                        {{ writers }}
                     </td>
                 </tr>
 
@@ -191,27 +218,11 @@
                     <td>Starring:</td>
                     <td>
                         <div class="ui list">
-                            <div class="item">
-                                Benedict Cumberbatch ( Alan Turing )
-                            </div>
-                            <div class="item">
-                                Keira Knightley ( Joan Clarke )
-                            </div>
-                            <div class="item">
-                                Matthew Goode ( Hugh Alexander )
-                            </div>
-
-                            <div class="item">
-                                Rory Kinnear ( Detective Robert Nock )
-                            </div>
-
-                            <div class="item">
-                                Charles Dance ( Commander Denniston )
-                            </div>
-
-                            <div class="item">
-                                Mark Strong ( Stewart Menzies )
-                            </div>
+                            {% for cast in staring %}
+                                <div class="item">
+                                    {{ cast.actor }} ( {{ cast.role }} )
+                                </div>
+                            {% endfor %}
                         </div>
 
                     </td>
@@ -219,7 +230,7 @@
                 <tr>
                     <td> Country: </td>
                     <td>
-                        United States
+                        {{ country }}
                     </td>
                 </tr>
                 <tr>
@@ -227,52 +238,10 @@
                         Language:
                     </td>
                     <td>
-                        English
+                        {{ language }}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!--
-    <div class="ui comments">
-        <h3 class="ui dividing header">Your Comments</h3>
-        <div class="comment">
-            <a class="avatar">
-                <img src="{% static 'img/milad.jpg' %}">
-            </a>
-            <div class="content">
-                <a class="author">Merlion</a>
-                <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                </div>
-                <div class="text">
-                    How artistic!
-                </div>
-            </div>
-        </div>
-
-        <div class="comment">
-            <a class="avatar">
-                <img src="{% static 'img/milad.jpg' %}">
-            </a>
-            <div class="content">
-                <a class="author">Merlion</a>
-                <div class="metadata">
-                    <span class="date">28 April 2015 at 4:20 PM</span>
-                </div>
-                <div class="text">
-                    I like this movie! ^_^
-                </div>
-            </div>
-        </div>
-        <form class="ui reply form">
-            <div class="field">
-                <textarea></textarea>
-            </div>
-            <div class="ui teal labeled submit icon button">
-                <i class="icon edit"></i> Add Comment
-            </div>
-        </form>
-    </div>
-    -->
 {% endblock %}
