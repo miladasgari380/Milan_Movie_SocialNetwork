@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate, logout
 from WebProject.settings import MEDIA_ROOT, BASE_DIR
 from .form import *
+from itertools import chain
 
 @login_required(login_url='/login/')
 def logout_view(request):
@@ -84,23 +85,31 @@ def signup(request):
 def home(request):
     current_user = Guest.objects.get(username=request.user.username)
 
-    #una e ke followshun mikone
-   # usr = request.user #not sure
-    posts = Post.objects.all().order_by("-date")
-    comments = Comment.objects.all().order_by("-date")
-    likes = Like.objects.all()
-    # for p in posts:
-    #     comments = Comment.objects.filter(post=p).order_by("-date")
-    #     dict[p.id] = comments.id
-    # print(dict)
+    flw = Follow.objects.filter(follower=current_user)
+    posts = Post.objects.filter(owner=current_user).order_by("-date")
+    for fw in flw:
+        posts = list(chain(posts, Post.objects.filter(owner = fw.following)))
+    comments = []
+    likes = []
+    for i, p in enumerate(posts):
+        posts[i].cnums = len(Comment.objects.filter(post = p))
+        posts[i].lnums = len(Like.objects.filter(post=p))
+        for c in Comment.objects.filter(post = p):
+            comments.append(c)
+        for l in Like.objects.filter(post=p):
+            likes.append(l)
+        if not Like.objects.filter(post=p, user=current_user):
+            posts[i].userLike = False
+        else:
+            posts[i].userLike = True
+        print(posts[i].userLike)
+
     return render(request, "home.html", {
         'posts': posts,
         'current_user': current_user,
-        # 'dict': dict,
         'comments': comments,
-        'likes': likes,
+        'likes': likes
     })
-
 
 def show_post(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -203,11 +212,13 @@ def send_post(request):
         mymovie_name = Movie.objects.get(name=request.POST['movie_name'])
         mydate = datetime.datetime.now()
         mytext = request.POST['text']
+        myrate = request.POST['rate']
         print(myowner)
         print(mymovie_name)
         print(mydate)
         print(mytext)
-        p = Post(date=mydate, owner=myowner, text=mytext, movie_name=mymovie_name)
+        print(myrate)
+        p = Post(date=mydate, owner=myowner, text=mytext, movie_name=mymovie_name, rate=myrate)
         print("kdhsajhdskah")
         p.save()
         print("zende am")
@@ -227,6 +238,46 @@ def follow(request):
         f.save()
         status = 1
         return HttpResponse(json.dumps(status), content_type="application/json")
+
+@login_required(login_url='/login/')
+def like_post(request):
+    print("in like this")
+    if request.method == "POST":
+        type = request.POST['type']
+        username = request.POST['user']
+        post_id = request.POST['l_post_id'][4:]
+
+        user = Guest.objects.get(username=username)
+        post = Post.objects.get(id=post_id)
+        if type == "add":
+            l = Like(user=user, post=post)
+            l.save()
+        else:
+            Like.objects.filter(user=user, post=post).delete()
+        status = 1
+        return HttpResponse(json.dumps(status), content_type="application/json")
+
+@login_required(login_url='/login/')
+def comment_post(request):
+    print("in comment this")
+    if request.method == "POST":
+        user_name = request.POST['user']
+        post_id = request.POST['comment_post_id'][7:]
+        text = request.POST['text']
+
+        print(user_name)
+        print(text)
+        print(post_id)
+
+        user = Guest.objects.get(username=user_name)
+        post = Post.objects.get(id=post_id)
+
+        c = Comment(post=post, user=user, text=text, date=datetime.datetime.now())
+        c.save()
+
+        status = 1
+        return HttpResponse(json.dumps(status), content_type="application/json")
+
 
 #
 # def forgot(request, hash):

@@ -21,7 +21,6 @@
     <script>
         $("#AddPost").on("click",function(e){
             e.preventDefault();
-            alert("clicked");
             $.ajax({
                 type: "POST",
                 url: "/sendpost/",
@@ -30,6 +29,7 @@
                     movie_name: "{{ movie_name }}",
                     owner: "{{ logined_user }}",
                     text: $('#PostComment').val(),
+                    rate: $('#openModal').rating('get rating') * 2,
                     csrfmiddlewaretoken: "{{ csrf_token }}"
                 },
                 success: function(json){

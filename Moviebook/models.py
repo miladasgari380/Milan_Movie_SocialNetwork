@@ -44,6 +44,7 @@ class Post(models.Model):
     owner = models.ForeignKey(Guest)
     date = models.DateTimeField()
     text = models.CharField(max_length=1000)
+    rate = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.owner.first_name + " " + self.owner.last_name + " about " + self.movie_name.name)

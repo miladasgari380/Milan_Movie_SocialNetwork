@@ -16,7 +16,6 @@
     <script>
 
     	$(document).ready(function() {
-            console.log('salam');
             $('.tooltip').tooltipster();
         	$('.postTitle').tooltipster({
             	content: $('<i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="empty star icon"></i>  ( 8.1 / 10 ) ' +
@@ -57,31 +56,85 @@
         });
 
     	$('.addComment').click(function(event){
-            var txt = $(this).prev().children().eq(0).val();
-            if(txt != "") {
-				var blk = '<div class="comment"> <a class="avatar"> <img src="{% static 'img/anon.png' %}"> </a> <div class="content"> <a class="author"> You </a> <div class="metadata"> <span class="date">Just now</span> </div> <div class="text">'.concat(txt, '</div></div></div>');
-            	$(this).parent().before(blk);
-                var cmn = $(this).parent().parent().prev().prev().children().eq(0).html();
-            	var num = parseInt(cmn.split(' ')[0], 10);
-            	num ++;
-            	cmn = num + " Comments";
-                $(this).parent().parent().prev().prev().children().eq(0).html(cmn);
-            	$(this).prev().children().eq(0).val("");
-        	}
+            var keep = this;
+            $.ajax({
+                type: "POST",
+                url: "/commentthis/",
+                datatype: "json",
+                data:{
+                    comment_post_id: keep.id,
+                    user: "{{ current_user }}",
+                    text: $(keep).prev().children().eq(0).val(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(json){
+                    var txt = $(keep).prev().children().eq(0).val();
+                    if(txt != "") {
+                        var dt = new Date($.now());
+                        var ttime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " in " + dt.getFullYear() + "." + dt.getMonth() + "." + dt.getDate();
+                        var blk = ('<div class="comment"> <a class="avatar"> <img src="{{ current_user.avatar.url }}"> </a> <div class="content"> <a class="author"> {{ current_user.username }} </a> <div class="metadata"> <span class="date">').concat(ttime, '</span> </div> <div class="text">').concat(txt, '</div></div></div>');
+                        $(keep).parent().before(blk);
+                        var cmn = $(keep).parent().parent().prev().prev().children().eq(0).html();
+                        var num = parseInt(cmn.split(' ')[0], 10);
+                        num ++;
+                        cmn = num + " Comments";
+                        $(keep).parent().parent().prev().prev().children().eq(0).html(cmn);
+                        $(keep).prev().children().eq(0).val("");
+                    }
+                },
+                error: function(json,errmsg,err){
+                }
+            });
+            return false;
         });
     	$('.likeThis').click(function(event){
-			var blk = $(this).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
-            console.log(blk);
-            var num = parseInt(blk.split(' ')[0], 10);
-            if($(this).rating('get rating') == 1){
-                num++;
+            var keep = this;
+            if($(keep).rating('get rating') == 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/likethis/",
+                    datatype: "json",
+                    data:{
+                        user: "{{ current_user }}",
+                        l_post_id: keep.id,
+                        type: "remove",
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(json){
+                        var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
+                        var num = parseInt(blk.split(' ')[0], 10);
+                        num --;
+                        blk = num + " Likes";
+                        $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
+                    },
+                    error: function(json,errmsg,err){
+                    }
+                });
+                return false;
             }
             else {
-                num--;
+                $.ajax({
+                    type: "POST",
+                    url: "/likethis/",
+                    datatype: "json",
+                    data:{
+                        user: "{{ current_user }}",
+                        l_post_id: keep.id,
+                        type: "add",
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(json){
+                        var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
+                        var num = parseInt(blk.split(' ')[0], 10);
+                        num ++;
+                        blk = num + " Likes";
+                        $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
+                    },
+                    error: function(json,errmsg,err){
+                    }
+                });
+                return false;
             }
-            console.log(num);
-            blk = num + " Likes";
-            $(this).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
         });
     </script>
 {% endblock %}
@@ -97,19 +150,27 @@
 		{% for post in posts %}
             <div class="item">
                 <div class="image">
-                    <img class="tooltip" title="This is my image's tooltip message!" src="../static/img/movies/{{ post.movie_name.id }}.jpg">
+                    <img class="tooltip" src="{{ post.movie_name.cover.url }}">
                 </div>
                 <div class="content">
                     <h2 class="header">
                             <span class="postTitle">{{ post.movie_name }}</span>
-                            <div id="post{{ post.id }}" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
+                            {% if post.userLike %}
+                                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
+                            {% else %}
+                                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
+                            {% endif %}
                             <br/>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="half empty star icon"></i>
-                            (9 / 10)
+                            {% for i in "02468" %}
+                                {% if post.rate >= i|add:"2" %}
+                                    <i class="star icon"></i>
+                                {% elif post.rate|add:"1" >= i|add:"2" %}
+                                    <i class="star half empty icon"></i>
+                                {% else %}
+                                    <i class="star empty icon"></i>
+                                {% endif %}
+                            {% endfor %}
+                            ({{ post.rate }} / 10)
                     </h2>
                     <div class="meta">
                         <span><a href="post/{{ post.id }}"> {{ post.date }} </a></span>
@@ -127,11 +188,11 @@
                         </div>
 
                         <a class="showComments">
-                            <span>0 Comments</span>
+                            <span>{{ post.cnums }} Comments</span>
                             <i class ="icon comment"></i>
                         </a>
                         <a class="showLikes">
-                            <span>0 Likes</span>
+                            <span>{{ post.lnums }} Likes</span>
                             <i class="icon thumbs up"></i>
                         </a>
                         <!-- Comments -->
@@ -140,22 +201,22 @@
                             <h3 class="ui dividing header">Comments</h3>
                             {% for comment in comments %}
                                 {% if comment.post == post %}
-                                <div class="comment">
-                                    <a class="avatar"> <img src="{% static 'img/anon.png' %}"> </a>
-                                    <div class="content">
-                                        <a class="author"> {{ comment.user }} </a> <div class="metadata"> <span class="date">{{ comment.date }}</span> </div>
-                                        <div class="text">
-                                            {{ comment.text }}
+                                    <div class="comment">
+                                        <a class="avatar"> <img src="{{ comment.user.avatar.url }}"> </a>
+                                        <div class="content">
+                                            <a class="author"> {{ comment.user.username }} </a> <div class="metadata"> <span class="date">{{ comment.date }}</span> </div>
+                                            <div class="text">
+                                                {{ comment.text }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endif %}
                             {% endfor %}
                             <form class="ui reply form">
                                 <div class="field">
                                     <textarea></textarea>
                                 </div>
-                                <div class="ui blue labeled submit icon button addComment">
+                                <div id = "comment{{ post.id }}" class="ui blue labeled submit icon button addComment">
                                     <i class="icon edit"></i> Add Reply
                                 </div>
                             </form>
@@ -166,19 +227,18 @@
                             <i class="close icon"></i>
                             <div class="header">
                                 <i class="film icon"></i>
-                                {{ post.owner }}'s Post Likes
+                                {{ post.user.username }}'s Post Likes
                             </div>
                             <div class="content">
                                 <div class="ui divided list">
                                 {% for like in likes %}
                                     {% if like.post == post %}
                                         <div class="item">
-                                            <img class="ui avatar image" src="{% static 'img/anon.png'%}">
+                                            <img class="ui avatar image" src="{{ like.user.avatar.url }}">
                                             <div class="content">
                                                 <a class="header" href="/user_profile/{{ like.user.username }}/ ">{{ like.user.first_name }} {{ like.user.last_name }}</a>
                                             </div>
                                         </div>
-
                                     {% endif %}
                                 {% endfor %}
                                 </div>

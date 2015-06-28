@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^follow/$', views.follow, name= 'follow'),
     url(r'^unfollow/$', views.unfollow, name= 'unfollow'),
     url(r'^sendpost/$', views.send_post, name= 'sendpost'),
+    url(r'^likethis/$', views.like_post, name= 'likethis'),
+    url(r'^commentthis/$', views.comment_post, name= 'commentthis'),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),
 
