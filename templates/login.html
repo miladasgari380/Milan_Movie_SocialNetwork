@@ -54,11 +54,11 @@
 					  <a href="/signup/"><div class="ui red button">Sign Up</div></a>
 					</div>
 				</form>
-				<form id="forget_pass" class="ui form segment face back"> {% csrf_token %}
+				<form id="forget_pass" class="ui form segment face back" method="post" action="/newpassword/"> {% csrf_token %}
 					<div class="field">
 					    <label for="Email">Email</label>
 					    <div class="ui icon input">
-					        <input name="email" id="Email" placeholder="Email" type="email">
+					        <input name="email" id="email" placeholder="Type your email for reset password" type="email">
 					        <i class="at icon"></i>
 					    </div>
 					</div>
@@ -70,7 +70,7 @@
 					<div id="buttons" class="ui large buttons">
 					  <a href="#fliper"><div class="ui teal button">Back</div></a>
 					  <div class="or"></div>
-					  <div class="ui green button">Reset</div>
+					  <button class="ui green button" type="submit">Reset</button>
 					</div>
 				</form>
 			</div>

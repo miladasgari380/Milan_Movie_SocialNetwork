@@ -36,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^commentthis/$', views.comment_post, name= 'commentthis'), #done
     url(r'^clearnotif/$', views.clear_notif, name= 'clearnotif'), #done
     url(r'^settings/$', views.settings , name='settings'), #done
+    url(r'^newpassword/$', views.send_new_password, name="sendnewpass"),
 
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),

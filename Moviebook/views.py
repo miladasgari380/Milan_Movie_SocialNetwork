@@ -1,7 +1,10 @@
 import json
 import datetime
+import random
+import string
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from Moviebook.models import *
 from django.http import Http404, HttpResponseRedirect, HttpResponse
@@ -10,6 +13,31 @@ from django.contrib.auth import login as auth_login, authenticate, logout
 from WebProject.settings import MEDIA_ROOT, BASE_DIR
 from .form import *
 from itertools import chain
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for x in range(size))
+
+def send_new_password(request):
+    form = ResetPass(request.POST)
+    if form.is_valid():
+        email = form.cleaned_data['email']
+        usr = Guest.objects.get(email=email)
+        print(usr.username)
+        new_pass = id_generator(10)
+        usr.set_password(new_pass)
+        usr.save()
+        msg = "Your new password:"
+        msg += str(new_pass)
+        msg += "\n\n"
+        msg += "As you ordered"
+        msg += "\n\n"
+        msg += "If that wasn't you, login to your account and change it immediately"
+        subject = "Password Reset"
+        sender = "moviebookteam@gmail.com"
+        recipients = [usr.email]
+        send_mail(subject, msg, sender, recipients)
+        return redirect('/login/')
+
 
 @login_required(login_url='/login/')
 def logout_view(request):
@@ -70,6 +98,7 @@ def signup(request):
             # except:
                 # pass
             message = "Successfully created"
+            return redirect('/login/')
     else:
         form = SignupForm()
         message = "Unsuccessful creation"

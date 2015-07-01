@@ -10,8 +10,11 @@ class LoginForm(forms.Form):
 
 class SignupForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput)
-    birthday = forms.DateField(widget=SelectDateWidget)
+    birthday = forms.DateField(widget=SelectDateWidget(years=range(2015,1900,-1)))
 
     class Meta:
         model = Guest
         fields = ['username', 'password', 'first_name', 'last_name', 'birthday', 'email', 'gender', 'avatar']
+
+class ResetPass(forms.Form):
+    email = forms.EmailField(max_length=100)
