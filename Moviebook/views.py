@@ -382,6 +382,8 @@ def settings(request):
             current_user.first_name = request.POST['first_name']
         if not request.POST['last_name'] == '':
             current_user.last_name = request.POST['last_name']
+        if not request.POST['email'] == '':
+            current_user.email = request.POST['email']
         if not request.POST['password'] == '':
             current_user.set_password(request.POST['password'])
         # if not request.POST['birthday'] == '':
