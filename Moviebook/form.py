@@ -18,3 +18,10 @@ class SignupForm(forms.ModelForm):
 
 class ResetPass(forms.Form):
     email = forms.EmailField(max_length=100)
+
+class SettingForm(forms.Form):
+    # birthday = forms.DateField(widget=SelectDateWidget(years=range(2015,1900,-1)))
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)

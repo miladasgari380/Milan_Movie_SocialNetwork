@@ -254,17 +254,6 @@ def followings(request, user_name):
     })
 
 @login_required(login_url='/login/')
-def settings(request):
-    base_elements = make_base(request.user.username)
-    current_user = Guest.objects.get(username=request.user.username)
-    return render(request, "settings.html", {
-        'base_elements': base_elements,
-        'current_user': current_user
-    })
-
-
-
-@login_required(login_url='/login/')
 def unfollow(request):
     print("got it!")
     if request.method == "POST":
@@ -377,6 +366,37 @@ def make_base(current_user):
     base_elements.adv_movies = Movie.objects.all().order_by('?')[:2]
     base_elements.usr = current_user
     return base_elements
+
+
+@login_required(login_url='/login/')
+def settings(request):
+    base_elements = make_base(request.user.username)
+    current_user = Guest.objects.get(username=request.user.username)
+    if request.method == "POST":
+        form = SettingForm(request.POST)
+        # if form.is_valid():
+        print(request.POST)
+        # if not new_user.avatar == None:
+        #     current_user.avatar = new_user.avatar
+        if not request.POST['first_name'] == '':
+            current_user.first_name = request.POST['first_name']
+        if not request.POST['last_name'] == '':
+            current_user.last_name = request.POST['last_name']
+        if not request.POST['password'] == '':
+            current_user.set_password(request.POST['password'])
+        # if not request.POST['birthday'] == '':
+        #     current_user.birthday = request.POST['birthday']
+        current_user.save()
+        print(current_user.first_name)
+        return redirect('/home/')
+
+    form = SettingForm()
+    return render(request, "settings.html", {
+        'base_elements': base_elements,
+        'current_user': current_user,
+        'form': form,
+    })
+
 
 #
 # def forgot(request, hash):

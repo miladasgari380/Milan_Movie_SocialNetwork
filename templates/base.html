@@ -51,7 +51,7 @@
                     <span class="text">{{ base_elements.usr }}</span>
                     <div class="menu" tabindex="-1">
                         <a href="/user_profile/{{ base_elements.usr }}/"><div class="item">Profile</div></a>
-                        <div class="item">Settings</div>
+                        <div id='settings' class="item">Settings</div>
                         <div class="divider"></div>
                         <a href="/logout/"><div class="item">Logout</div></a>
                     </div>
@@ -276,6 +276,11 @@
         	//$("#chat_select").sidebar('attach events', '#movies');
 		</script>
         <script>
+        $("#settings").on("click",function(e) {
+            e.preventDefault();
+            window.location= "/settings/";
+        });
+
         $(document).ready(function(){
             $('.chat_window').hide();
         });

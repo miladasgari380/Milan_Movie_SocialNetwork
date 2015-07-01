@@ -7,13 +7,40 @@
 
 {% block js %}
     {{ block.super }}
+    <script>
+		(function ($) {$('.ui.form')
+		  .form({
+		    password: {
+		      identifier : 'password',
+		      rules: [
+		        {
+		          type   : 'empty',
+		          prompt : 'Please enter a password'
+		        },
+		        {
+		          type   : 'length[6]',
+		          prompt : 'Your password must be at least 6 characters'
+		        }
+		      ]
+		    },
+		    passwordConfirm: {
+		        identifier: 'passwordConfirm',
+		        rules: [{
+		          type: 'match[password]',
+		          prompt: 'Password don\'t match'
+		        }]
+		    }
+
+		  },{inline : true, on : 'blur'});
+		}(jQuery));
+		</script>
 {% endblock %}
 
 {% block body %}
     <article id ="main_block">
         <div class="ui form segment">
             <h1>Settings</h1>
-            <form class="ui form segment" method="post" enctype="multipart/form-data"> {% csrf_token %}
+            <form id="setting_form" class="ui form segment" method="post" enctype="multipart/form-data" action=""> {% csrf_token %}
                 <div class="two fields">
                   <div class="field">
                     <label for="FirstName">First Name</label>
@@ -25,10 +52,10 @@
                     <input id="LastName" placeholder="{{ current_user.last_name }}" type="text" name="last_name">
                   </div>
                 </div>
-                <div class = "field">
-                    <label for="calender">Birth Date</label>
-                    {{ form.birthday }}
-                </div>
+{#                <div class = "field">#}
+{#                    <label for="calender">Birth Date</label>#}
+{#                    {{ form.birthday }}#}
+{#                </div>#}
 
                 <div class="field">
                   <label for="password">New Password</label>
@@ -39,14 +66,14 @@
                   <label for="passwordConfirm">New Password Confirm</label>
                   <input id="passwordConfirm" type="password" name="confirm_password">
                 </div>
-                <div class="field">
-                    <label for="avatar">Upload Photo</label>
-                    <input type="file" name="avatar" accept="image/*">
-                </div>
+{#                <div class="field">#}
+{#                    <label for="avatar">Upload Photo</label>#}
+{#                    <input type="file" name="avatar" accept="image/*">#}
+{#                </div>#}
                 <div id="buttons_signup" class="ui buttons">
                    <a href="{% url 'login' %}"><div class="ui red button">Back</div></a>
                   <div class="or"></div>
-                  <a href="#" onclick="document.getElementById('signup_form').submit();"><div class="ui teal submit button">Save</div></a>
+                  <a href="#" onclick="document.getElementById('setting_form').submit();"><div class="ui teal submit button">Save</div></a>
                 </div>
                 <!--<div class="ui error message"></div>-->
             </form>
