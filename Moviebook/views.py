@@ -13,14 +13,11 @@ from itertools import chain
 
 @login_required(login_url='/login/')
 def logout_view(request):
-    # print("khari")
     logout(request)
-    # print("ridam2")
     return redirect('/login/')
 
 
 def login_view(request):
-    # print("ridam1")
     message = ''
     if request.method == "POST":
 
@@ -84,11 +81,14 @@ def signup(request):
 @login_required(login_url='/login/')
 def home(request):
     current_user = Guest.objects.get(username=request.user.username)
+    base_elements = make_base(current_user)
 
     flw = Follow.objects.filter(follower=current_user)
     posts = Post.objects.filter(owner=current_user).order_by("-date")
     for fw in flw:
         posts = list(chain(posts, Post.objects.filter(owner = fw.following)))
+
+
     comments = []
     likes = []
     for i, p in enumerate(posts):
@@ -105,6 +105,7 @@ def home(request):
         print(posts[i].userLike)
 
     return render(request, "home.html", {
+        'base_elements': base_elements,
         'posts': posts,
         'current_user': current_user,
         'comments': comments,
@@ -113,9 +114,22 @@ def home(request):
 
 def show_post(request, post_id):
     post = Post.objects.get(id=post_id)
-    # post = Post.objects.filter(owner=usr).get(id)
+    current_user = Guest.objects.get(username=request.user.username)
+    base_elements = make_base(current_user)
+    post.cnums = len(Comment.objects.filter(post = post))
+    post.lnums = len(Like.objects.filter(post=post))
+    comments = Comment.objects.filter(post = post)
+    likes = Like.objects.filter(post=post)
+    if not Like.objects.filter(post=post, user=current_user):
+        post.userLike = False
+    else:
+        post.userLike = True
     return render(request, "post.html", {
+        'base_elements': base_elements,
         'post': post,
+        'current_user': current_user,
+        'comments': comments,
+        'likes': likes
     })
 
 
@@ -123,6 +137,7 @@ def show_post(request, post_id):
 @login_required(login_url='/login/')
 def movie_profile(request, movie_name):
     current_user = Guest.objects.get(username=request.user.username)
+    base_elements = make_base(current_user)
     try:
         mv = Movie.objects.get(name=movie_name)
         staring = Staring.objects.filter(movie=mv)
@@ -131,6 +146,7 @@ def movie_profile(request, movie_name):
         raise Http404
 
     return render(request, "movie_profile.html", {
+        'base_elements': base_elements,
         'movie_name': mv.name,
         'summary': mv.summary,
         'release': mv.release,
@@ -151,43 +167,72 @@ def movie_profile(request, movie_name):
 @login_required(login_url='/login/')
 def user_profile(request, user_name):
     current_user = Guest.objects.get(username=request.user.username)
+    base_elements = make_base(current_user)
     try:
         usr = Guest.objects.get(username = user_name)
-        print(usr.first_name)
         followers = Follow.objects.filter(following = usr)
         following = Follow.objects.filter(follower = usr)
-        posts = Post.objects.filter(owner = usr).order_by("date")
         temp1 = [x.follower.username for x in followers]
         temp2 = [x.following.username for x in following]
-        print(temp1)
+
+        posts = Post.objects.filter(owner=usr).order_by("-date")
+        comments = []
+        likes = []
+        for i, p in enumerate(posts):
+            posts[i].cnums = len(Comment.objects.filter(post = p))
+            posts[i].lnums = len(Like.objects.filter(post=p))
+            for c in Comment.objects.filter(post = p):
+                comments.append(c)
+            for l in Like.objects.filter(post=p):
+                likes.append(l)
+            if not Like.objects.filter(post=p, user=current_user):
+                posts[i].userLike = False
+            else:
+                posts[i].userLike = True
     except Guest.DoesNotExist:
         raise Http404
 
     return render(request, "user_profile.html", {
+        'base_elements': base_elements,
         'user': usr,
         'current_user': current_user,
         'follower': temp1,
         'following': temp2,
-        'posts': posts
+        'posts': posts,
+        'comments': comments,
+        'likes': likes
     })
-
 
 def followers(request, user_name):
     usr = Guest.objects.get(username = user_name)
+    base_elements = make_base(usr)
     followers = Follow.objects.filter(following = usr)
     temp = [x.follower for x in followers]
     return render(request, "users_list.html", {
+        'base_elements': base_elements,
         'list': temp
     })
 
 
 def followings(request, user_name):
     usr = Guest.objects.get(username = user_name)
+    base_elements = make_base(usr)
     followings = Follow.objects.filter(follower = usr)
     temp = [x.following for x in followings]
     return render(request, "users_list.html", {
+        'base_elements': base_elements,
         'list': temp
     })
+
+@login_required(login_url='/login/')
+def settings(request):
+    base_elements = make_base(request.user.username)
+    current_user = Guest.objects.get(username=request.user.username)
+    return render(request, "settings.html", {
+        'base_elements': base_elements,
+        'current_user': current_user
+    })
+
 
 
 @login_required(login_url='/login/')
@@ -229,13 +274,14 @@ def send_post(request):
 def follow(request):
     if request.method == "POST":
         user_name = request.POST['user']
-        print(user_name)
         usr = Guest.objects.get(username=user_name)
         current_user = Guest.objects.get(username=request.user.username)
         f = Follow()
         f.follower = current_user
         f.following = usr
         f.save()
+        n = Notification(fromUser=current_user, forUser=usr, msg="start following you!", link="/user_profile/" + current_user.username, read=False)
+        n.save()
         status = 1
         return HttpResponse(json.dumps(status), content_type="application/json")
 
@@ -252,6 +298,8 @@ def like_post(request):
         if type == "add":
             l = Like(user=user, post=post)
             l.save()
+            n = Notification(fromUser=user, forUser=post.owner, msg="like your post!", link="/post/" + post_id, read=False)
+            n.save()
         else:
             Like.objects.filter(user=user, post=post).delete()
         status = 1
@@ -274,10 +322,32 @@ def comment_post(request):
 
         c = Comment(post=post, user=user, text=text, date=datetime.datetime.now())
         c.save()
-
+        n = Notification(fromUser=user, forUser=post.owner, msg="comment on your post", link="/post/" + post_id, read=False)
+        n.save()
         status = 1
         return HttpResponse(json.dumps(status), content_type="application/json")
 
+@login_required(login_url='/login/')
+def clear_notif(request):
+    if request.method == "POST":
+        nf_link = request.POST['nf_link']
+        print(nf_link)
+        nf = Notification.objects.get(id=nf_link)
+        print(nf.link)
+        print(nf.read)
+        nf.read = True
+        nf.save()
+        print(nf.read)
+        status = 1
+        return HttpResponse(json.dumps(status), content_type="application/json")
+
+def make_base(current_user):
+    user = Guest.objects.filter(username=current_user)
+    base_elements = Notification.objects.filter(read=False, forUser=user)
+    base_elements.adv_users = Guest.objects.all().order_by('?')[:3]
+    base_elements.adv_movies = Movie.objects.all().order_by('?')[:2]
+    base_elements.usr = current_user
+    return base_elements
 
 #
 # def forgot(request, hash):

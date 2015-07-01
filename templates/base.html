@@ -34,18 +34,23 @@
             <div class="right menu">
                 <a class="ui pointing dropdown link item">
                     <i class="alarm icon" tabindex="0"></i>
-                    <div class="circular ui teal label">2</div>
+                    <div class="circular ui teal label">{{ base_elements | length }}</div>
                     <div class="menu" tabindex="-1">
-                        <div class="item">Notife #1</div>
-                        <div class="item">Notife #2</div>
+                        {% for nf in base_elements %}
+                        	<div class="item nf_link" id ="{{ nf.id }}">
+                            	<div id="{{ nf.link }}">
+                                </div>
+                                {{ nf.fromUser.username }} {{ nf.msg }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </a>
 
                 <div class="ui pointing dropdown link item" tabindex="-1">
                     <i class="dropdown icon" tabindex="0"></i>
-                    <span class="text">{{ current_user.username }}</span>
+                    <span class="text">{{ base_elements.usr }}</span>
                     <div class="menu" tabindex="-1">
-                        <a href="/user_profile/{{ current_user.username }}/"><div class="item">Profile</div></a>
+                        <a href="/user_profile/{{ base_elements.usr }}/"><div class="item">Profile</div></a>
                         <div class="item">Settings</div>
                         <div class="divider"></div>
                         <a href="/logout/"><div class="item">Logout</div></a>
@@ -81,17 +86,16 @@
 					<div class="ui basic segment">
                         <div id="chats" class="ui list divided selection">
                           <h3 class="ui header">Chat with...</h3>
-						  <div class="item">
-							<img class="ui avatar image" src="{% static 'img/Nazanin.jpg' %}">
-							<div class="content">
-							  <div class="header"><span>Nazanin Alipour</span>
-                                <div class="ui red circular label">
-								  3
+							  <div class="item">
+								<img class="ui avatar image" src="{% static 'img/Nazanin.jpg' %}">
+								<div class="content">
+								  <div class="header"><span>Nazanin Alipour</span>
+									<div class="ui red circular label">
+									  3
+									</div>
+								  </div>
 								</div>
-                              </div>
-							</div>
-						  </div>
-
+							  </div>
 						  <div class="item">
 							<img class="ui avatar image" src="{% static 'img/Milad.jpg' %}">
 							<div class="content">
@@ -101,112 +105,55 @@
 						</div>
                         <div id="movies" class="ui items divided">
                           <h3 class="ui header">Movies you may like:</h3>
-						  <div class="ui blue segment">
-							<div class="content">
-							  <a class="header" href=""><h3>Nightcrawler</h3></a>
-                              <img class="image" src="{% static 'img/movie_nightcrawler.jpg' %}">
-                              <div class="meta">
-								<div><i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="star half empty icon"></i>(9.0/10)</div>
-                                 <!-- <div>Director: Dan Gilroy</div>
-                                <div>Writer: Dan Gilroy </div> -->
+
+                            {% for mv in base_elements.adv_movies %}
+							  <div class="ui blue segment">
+								<div class="content">
+								  <a class="header" href="/movie_profile/{{ mv.name }}/"><h3>{{ mv.name }}</h3></a>
+								  <img class="image" src="{{ mv.cover.url }}">
+								  <div class="meta">
+
+								{% for i in "02468" %}
+									{% if mv.stars|add:mv.stars >= i|add:"2" %}
+										<i class="star icon"></i>
+									{% elif mv.stars|add:mv.stars|add:"1" >= i|add:"2" %}
+										<i class="star half empty icon"></i>
+									{% else %}
+										<i class="star empty icon"></i>
+									{% endif %}
+								{% endfor %}
+                                  ({{ mv.stars|add:mv.stars }}/10)
+								  </div>
+								</div>
 							  </div>
-							</div>
-						  </div>
-                          <h6 class="ui dividing header"></h6>
-                          <div class="ui blue segment">
-							<div class="content">
-							  <a class="header" href=""><h3>Still Alice</h3></a>
-                              <img class="image" src="{% static 'img/movie_Alice.jpg' %}">
-                              <div class="meta">
-								<div><i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="star empty icon"></i><i class="star empty icon"></i>(6.0/10)</div>
-                                 <!-- <div>Director: Dan Gilroy</div>
-                                <div>Writer: Dan Gilroy </div> -->
-							  </div>
-                            </div>
-						  </div>
+							  <h6 class="ui dividing header"></h6>
+                            {% endfor %}
 						</div>
                         <div id="people" class="ui special cards one">
                             <br/>
                             <h3 class="ui header">People you may know:</h3>
-						  <div class="blue card my_card">
-							<div class="dimmable image">
-							  <div class="ui dimmer">
-								<div class="content">
-								  <div class="center">
-									<div class="ui inverted button blue">Follow</div>
+                            {% for ur in base_elements.adv_users %}
+							  <div class="blue card my_card">
+								<div class="dimmable image">
+								  <div class="ui dimmer">
+									<div class="content">
+									  <div class="center">
+										<div class="ui inverted button blue">Follow</div>
+									  </div>
+									</div>
 								  </div>
+								  <img src="{{ ur.avatar.url }}">
+								</div>
+								<div class="content">
+								</div>
+								<div class="extra content">
+								  <a href="/user_profile/{{ ur.username }}/">
+									<i class="users icon"></i>
+									{{ ur.first_name }} {{ ur.last_name }}
+								  </a>
 								</div>
 							  </div>
-							  <img src="{% static 'img/Nazanin.jpg' %}">
-							</div>
-							<div class="content">
-
-{#							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>#}
-							  <!--
-                                <div class="meta">
-								<span class="date">Create in Sep 2014</span>
-							  </div>
-                                -->
-							</div>
-							<div class="extra content">
-							  <a>
-								<i class="users icon"></i>
-								1 Follower
-							  </a>
-							</div>
-						  </div>
-                          <div class="blue card my_card">
-							<div class="dimmable image">
-							  <div class="ui dimmer">
-								<div class="content">
-								  <div class="center">
-									<div class="ui inverted button blue">Follow</div>
-								  </div>
-								</div>
-							  </div>
-							  <img src="{% static 'img/Milad.jpg' %}">
-							</div>
-							<div class="content">
-{#							  <a href="{% url 'user_profile' %}" class="header">Milad Asgari</a>#}
-							 <!--
-							   <div class="meta">
-								<span class="date">Create in Sep 2014</span>
-							  </div>
-							  -->
-							</div>
-							<div class="extra content">
-							  <a>
-								<i class="users icon"></i>
-								1 Follower
-							  </a>
-							</div>
-						  </div>
-                          <div class="blue card my_card">
-							<div class="dimmable image">
-							  <div class="ui dimmer">
-								<div class="content">
-								  <div class="center">
-									<div class="ui inverted button blue">Follow</div>
-								  </div>
-								</div>
-							  </div>
-							  <img src="{% static 'img/Nazanin.jpg' %}">
-							</div>
-							<div class="content">
-{#							  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>#}
-							  <!--
-                                <div class="meta">
-								<span class="date">Create in Sep 2014</span>
-							  </div>
-                                -->
-							</div>
-							<div class="extra content">
-							  <a>
-								<i class="users icon"></i>
-								1 Follower
-							  </a>
-							</div>
-						  </div>
+                            {% endfor %}
 						</div>
 					</div>
 			    </div>
@@ -266,9 +213,7 @@
                     var msg_div = '<div class="my_content"> <div class="ui content message"> <img class="ui avatar image" src="{% static 'img/Milad.jpg' %}"><div class="header">Milad</div><br/><br/><div class="description"><p>'.concat(msg, '</p></div></div></div>');
             		$(this).parent().prev().append(msg_div);
                     $(this).prev().val("");
-                    //console.log($('.chat_window .item').children().eq(childs).height());
                     height = height + $('.chat_window .item').children().eq(childs).height();
-                    console.log(height);
                     $('.chat_window .item').scrollTop(height);
                     childs++;
                 }
@@ -349,6 +294,26 @@
             $('.chat_window').children().eq(1).children().eq(0).children().eq(0).children().eq(0).attr("src", img);
             $('.chat_window').children().eq(1).children().eq(0).children().eq(0).children().eq(1).text(first_name+':');
         });
+        </script>
+        <script>
+        $(".nf_link").click(function(){
+            window.location= $(this).children().eq(0).attr("id")
+			ni = this.id;
+            $.ajax({
+                type: "POST",
+                url: "/clearnotif/",
+                datatype: "json",
+                data:{
+                    nf_link: ni,
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(json){
+                },
+                error: function(json,errmsg,err){
+                }
+            });
+            return false;
+		});
         </script>
 		{% endblock %}
 	</body>

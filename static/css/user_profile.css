@@ -16,6 +16,10 @@ p {
     width: 100%;
 }
 
+#mysettings {
+    width: 100%;
+}
+
 .likeThis {
     float: right;
 }
