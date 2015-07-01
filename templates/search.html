@@ -18,30 +18,30 @@
 
     </script>
     <script>
-        $('.special.cards .image').dimmer({ on: 'hover'});
-        $(document).on("click" ,".ui.inverted.button.blue",function(){
-            var following=$(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(2).text();
-            var age = $(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(0).text();
-            //console.log(age);
-            following = parseInt(following);
-            following ++;
-            console.log(following);
-            var news ='<a><h6 class="ui tiny purple header">'.concat(age,'</h6><i class="users icon"></i><span> '.concat(following, ' Follower </span></a>'));
-            $(this).parent().parent().parent().parent().next().next().children().remove();
-            $(this).parent().parent().parent().parent().next().next().append(news);
-            $(this).removeClass('blue').addClass('red').text('Unfollow');
-        });
-        $(document).on("click", ".ui.inverted.button.red",function(){
-            var following=$(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(2).text();
-            var age = $(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(0).text();
-            following = parseInt(following);
-            following --;
-            console.log(following);
-            var news ='<a><h6 class="ui tiny purple header">'.concat(age,'</h6><i class="users icon"></i><span> '.concat(following, ' Follower </span></a>'));
-            $(this).parent().parent().parent().parent().next().next().children().remove();
-            $(this).parent().parent().parent().parent().next().next().append(news);
-            $(this).removeClass('red').addClass('blue').text('Follow');
-        });
+{#        $('.special.cards .image').dimmer({ on: 'hover'});#}
+{#        $(document).on("click" ,".ui.inverted.button.blue",function(){#}
+{#            var following=$(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(2).text();#}
+{#            var age = $(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(0).text();#}
+{#            //console.log(age);#}
+{#            following = parseInt(following);#}
+{#            following ++;#}
+{#            console.log(following);#}
+{#            var news ='<a><h6 class="ui tiny purple header">'.concat(age,'</h6><i class="users icon"></i><span> '.concat(following, ' Follower </span></a>'));#}
+{#            $(this).parent().parent().parent().parent().next().next().children().remove();#}
+{#            $(this).parent().parent().parent().parent().next().next().append(news);#}
+{#            $(this).removeClass('blue').addClass('red').text('Unfollow');#}
+{#        });#}
+{#        $(document).on("click", ".ui.inverted.button.red",function(){#}
+{#            var following=$(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(2).text();#}
+{#            var age = $(this).parent().parent().parent().parent().next().next().children().eq(0).children().eq(0).text();#}
+{#            following = parseInt(following);#}
+{#            following --;#}
+{#            console.log(following);#}
+{#            var news ='<a><h6 class="ui tiny purple header">'.concat(age,'</h6><i class="users icon"></i><span> '.concat(following, ' Follower </span></a>'));#}
+{#            $(this).parent().parent().parent().parent().next().next().children().remove();#}
+{#            $(this).parent().parent().parent().parent().next().next().append(news);#}
+{#            $(this).removeClass('red').addClass('blue').text('Follow');#}
+{#        });#}
     </script>
 ;
 {% endblock %}
@@ -54,218 +54,75 @@
         </div>
         <div class="ui bottom attached active tab segment" data-tab="first">
             <div class="ui floating blue large message">
-              <p>2 match results found</p>
+              <p>{{ fmovies | length }} match results found</p>
             </div>
              <div class="ui divided items">
-                <div class="item">
-                    <a class="ui small image">
-                      <img src = "{% static 'img/TheImitationGame.jpg' %}" />
-                    </a>
-                    <div class="content">
-                        <div class = "extra">
-                            <div>Average rating:</div>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star half empty icon"></i>
-                        </div>
-                        <br/>
-                        <a href="{% url 'movie_profile' %}" class="black header"><h2>The Imitation Game</h2></a>
-                        <div class="description">
-                            <div class="header"><h3>Director:</h3></div>
-                            <a class="black header"><h5>Morten Tyldum</h5></a>
+                 {% for mv in fmovies %}
+                    <div class="item">
+                        <a class="ui small image">
+                          <img src = "{{ mv.cover.url }}" />
+                        </a>
+                        <div class="content">
+                            <div class = "extra">
+                                <div>Average rating:</div>
+                                {% for i in "02468" %}
+                                    {% if mv.rate >= i|add:"2" %}
+                                        <i class="star icon"></i>
+                                    {% elif mv.rate|add:"1" >= i|add:"2" %}
+                                        <i class="star half empty icon"></i>
+                                    {% else %}
+                                        <i class="star empty icon"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                ({{ mv.rate }} / 10)
+                            </div>
                             <br/>
-                            <p>During World War II, mathematician Alan Turing tries to crack the enigma code with help from fellow mathematicians.</p>
+                            <a href="/movie_profile/{{ mv.name }}/" class="black header"><h2>{{ mv.name }}</h2></a>
+                            <div class="description">
+                                <div class="header"><h3>Director:</h3></div>
+                                <a class="black header"><h5>{{ mv.director }}</h5></a>
+                                <br/>
+                                <p>{{ mv.summary }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="item">
-                    <a class="ui small image">
-                      <img src = "{% static 'img/MonstersInc.jpg' %}" />
-                    </a>
-                    <div class="content">
-                        <div class = "extra">
-                            <div>Average rating:</div>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star icon"></i>
-                            <i class="star empty icon"></i>
-                        </div>
-                        <br/>
-                        <a href="{% url 'movie_profile' %}" class="black header"><h2>Monsters University</h2></a>
-                        <div class="description">
-                            <div class="header"><h3>Director:</h3></div>
-                            <a class="black header"><h5>Dan Scanlon</h5></a>
-                            <br/>
-                            <p>A look at the relationship between Mike and Sulley during their days at Monsters University -- when they weren't necessarily the best of friends.</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
              </div>
         </div>
         <div class="ui bottom attached tab segment" data-tab="second">
             <div class="ui floating blue large message">
-              <p>7 match results found</p>
+              <p>{{ fusers | length }} match results found</p>
             </div>
             <div class="ui six doubling special cards">
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button red">Unfollow</div>
+                {% for us in fusers %}
+                  <div class="blue card">
+                    <div class="dimmable image">
+                      <div class="ui dimmer">
+                        <div class="content">
+                          <div class="center">
+{#                              {% if current_user in us.followers %}#}
+{#                                <div class="ui inverted button red">Unfollow</div>#}
+{#                              {% else %}#}
+{#                                <div class="ui inverted button red">Follow</div>#}
+{#                              {% endif %}#}
+                          </div>
+                        </div>
                       </div>
+                      <img src="{{ us.avatar.url }}">
+                    </div>
+                    <div class="content">
+                      <a href="/user_profile/{{ us.username }}/" class="header">{{ us.first_name }} {{ us.last_name }}</a>
+                    </div>
+                    <div class="extra content">
+                      <a href="/followers/{{ us.username }}">
+                          <h6 class="ui tiny purple header">{{ us.birthday }}</h6>
+                        <i class="users icon"></i>
+                        <span>{{ us.followers | length }} Followers </span>
+                      </a>
                     </div>
                   </div>
-                  <img src="{% static 'img/Nazanin.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>15 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button red">Unfollow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Nazanin2.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard New</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>1 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button blue">Follow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Milad.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Milad Asgari</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>12 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button blue">Follow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Kamyar.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Kamyar Allahverdi</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">25 Years</h6>
-                    <i class="users icon"></i>
-                    <span>1 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button blue">Follow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Razeghi.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">TA jan</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>1 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button blue">Follow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Nazanin.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>1 Follower</span>
-                  </a>
-                </div>
-              </div>
-              <div class="blue card">
-                <div class="dimmable image">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button blue">Follow</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img src="{% static 'img/Nazanin2.jpg' %}">
-                </div>
-                <div class="content">
-                  <a href="{% url 'user_profile' %}" class="header">Nazanin AlipourFard</a>
-                </div>
-                <div class="extra content">
-                  <a>
-                    <h6 class="ui tiny purple header">23 Years</h6>
-                    <i class="users icon"></i>
-                    <span>1 Follower</span>
-                  </a>
-                </div>
-              </div>
+                {% endfor %}
             </div>
         </div>
     </article>
-
 {% endblock %}

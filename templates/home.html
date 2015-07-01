@@ -9,13 +9,339 @@
 
 {% block js %}
     {{ block.super }}
+    <script>
+        var xx;
+        var check = 0;
+        var change = 0;
+    </script>
 
 	<script src="{% static 'js/jquery.tooltipster.js' %}"></script>
 	<script src="{% static 'js/jquery.tooltipster.min.js' %}"></script>
+    <script>
+{#        function make_posts(posts, comments, likes)#}
+{#        {#}
+{#            for(var i = 0; i < posts.length; i++)#}
+{#            {#}
+{#                post = posts[i];#}
+{#                ("#showPosts").append(#}
+{#                    '<div class="item">' +#}
+{#                    '<div class="image">' +#}
+{#                    '<img class="tooltip" src="' +#}
+{#                    post.movie_name.cover.picUrl +#}
+{#                    '">' +#}
+{#                    '</div><div class="content"><h2 class="header"><span class="postTitle">' +#}
+{#                    post.movie_name +#}
+{#                    '</span>'#}
+{#                )#}
+{#                if(post.userLike == True)#}
+{#                {#}
+{#                    ("#showPosts").append('<div id = "like' +#}
+{#                    post.id +#}
+{#                    '" class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>'#}
+{#                    )#}
+{#                }#}
+{#                else#}
+{#                {#}
+{#                    ("#showPosts").append('<div id = "like' +#}
+{#                    post.id +#}
+{#                    '" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>'#}
+{#                    )#}
+{#                }#}
+{#                ("#showPosts").append('<br/>');#}
+{#                for(var i = 0; i < 9; i += 2)#}
+{#                {#}
+{#                    if(post.rate >= i + 2)#}
+{#                        ("#showPosts").append('<i class="star icon"></i>');#}
+{#                    else if(post.rate + 1 >= i + 2)#}
+{#                        ("#showPosts").append('<i class="star half empty icon"></i>');#}
+{#                    else#}
+{#                        ("#showPosts").append('<i class="star empty icon"></i>');#}
+{#                }#}
+{#                ("#showPosts").append('(' + post.rate + ' / 10)');#}
+{#                ("#showPosts").append('</h2>' +#}
+{#                        '<div class="meta">' +#}
+{#                        '<span><a href="/post/' +#}
+{#                        post.id +#}
+{#                        '/">' +#}
+{#                        (post.date) +#}
+{#                        '</a></span>'+#}
+{#                        '</div>' +#}
+{#                        '<div class="description">' +#}
+{#                            '<p>' +#}
+{#                            post.text +#}
+{#                            '</p>' +#}
+{#                        '</div>' +#}
+{#                        '<div class="extra">' +#}
+{#                            '<div class="right floated author">' +#}
+{#                                '<img class="ui avatar image" src="' +#}
+{#                                post.owner.avatar.picUrl +#}
+{#                                '">' +#}
+{#                                '<a href = "/user_profile/' +#}
+{#                                post.owner.username +#}
+{#                                '" >' +#}
+{#                                post.owner.username +#}
+{#                                '</a>' +#}
+{#                            '</div>' +#}
+{#                            '<a class="showComments">' +#}
+{#                                '<span>' +#}
+{#                                post.cnums +#}
+{#                                'Comments</span>' +#}
+{#                                '<i class ="icon comment"></i>' +#}
+{#                            '</a>' +#}
+{#                            '<a class="showLikes">' +#}
+{#                                '<span>' +#}
+{#                                post.lnums +#}
+{#                                'Likes</span>' +#}
+{#                                '<i class="icon thumbs up"></i>' +#}
+{#                            '</a>' +#}
+{#                            '<div class="ui comments">' +#}
+{#                                '<br/>' +#}
+{#                                '<h3 class="ui dividing header">Comments</h3>'#}
+{#                            );#}
+{##}
+{#                                for(var j = 0; j < comments.length; j++)#}
+{#                                {#}
+{#                                    comment = comment[j];#}
+{#                                    if(comment.post == post)#}
+{#                                    {#}
+{#                                        ("#showPosts").append( '<div class="comment">'+#}
+{#                                        '<a class="avatar"> <img src="' +#}
+{#                                        comment.user.avatar.picUrl +#}
+{#                                        '"> </a>' +#}
+{#                                            '<div class="content">'+#}
+{#                                                '<a class="author">' +#}
+{#                                                comment.user.username +#}
+{#                                                '</a> <div class="metadata"> <span class="date">' +#}
+{#                                                comment.date +#}
+{#                                                '</span> </div>' +#}
+{#                                                '<div class="text">' +#}
+{#                                                 comment.text +#}
+{#                                                '</div>' +#}
+{#                                            '</div>' +#}
+{#                                        '</div>' );#}
+{#                                    }#}
+{#                                }#}
+{##}
+{#                                ("#showPosts").append( '<form class="ui reply form">' +#}
+{#                                    '<div class="field">' +#}
+{#                                        '<textarea></textarea>' +#}
+{#                                    '</div>' +#}
+{#                                    '<div id = "comment'+#}
+{#                                    post.id +#}
+{#                                    '" class="ui blue labeled submit icon button addComment">' +#}
+{#                                    '<i class="icon edit"></i> Add Reply' +#}
+{#                                    '</div>'+#}
+{#                                '</form>'+#}
+{#                            '</div>'+#}
+{#                            '<div class="ui small modal">' +#}
+{#                                '<i class="close icon"></i>' +#}
+{#                                '<div class="header">' +#}
+{#                                    '<i class="film icon"></i>' +#}
+{#                                    post.user.username +#}
+{#                                    's Post Likes' +#}
+{#                                '</div>' +#}
+{#                                '<div class="content">' +#}
+{#                                    '<div class="ui divided list">');#}
+{#                                    for(var j = 0; j < likes.length; j++) {#}
+{#                                        like = likes[i];#}
+{#                                        if (like.post == post) {#}
+{#                                            ('#showPosts').append(#}
+{#                                                    '<div class="item">' +#}
+{#                                                    '<img class="ui avatar image" src="' +#}
+{#                                                    like.user.avatar.picUrl +#}
+{#                                                    '">' +#}
+{#                                                    '<div class="content">' +#}
+{#                                                    '<a class="header" href="/user_profile/' +#}
+{#                                                    like.user.username +#}
+{#                                                    '/ ">' +#}
+{#                                                    like.user.first_name +#}
+{#                                                    ' ' +#}
+{#                                                    like.user.last_name +#}
+{#                                                    '</a>' +#}
+{#                                                    '</div>' +#}
+{#                                                    '</div>'#}
+{#                                            );#}
+{#                                        }#}
+{#                                    }#}
+{#                                    ("#showPosts").append(#}
+{#                                        '</div>' +#}
+{#                                        '</div>' +#}
+{#                                        '<div class="actions">' +#}
+{#                                        '</div>' +#}
+{#                                        '</div>' +#}
+{#                                        '</div>' +#}
+{#                                        '</div>' +#}
+{#                                        '</div>' +#}
+{#                                        '<hr/>'#}
+{#                                    );#}
+{#            }#}
+{#        }#}
+        function get_posts(xfrom, xto) {
+            console.log("in get posts " + xfrom + " " + xto);
+            $.ajax({
+                type: "POST",
+                url: "/home/",
+                datatype: "json",
+                data:{
+                    xfrom: xfrom,
+                    xto: xto,
+                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                },
+                success: function(data){
+                    check = 1;
+                    if(data != $('#showPosts').html())
+                    {
+                        $('#showPosts').html(data);
+                        change = 1;
+                    }
+                    else
+                        change = 0;
+                    myrefresh();
+                },
+                error: function(json,errmsg,err){
+                }
+            });
+        }
+    </script>
 
     <script>
-
     	$(document).ready(function() {
+            get_posts(0, 5);
+            xx = 5;
+        });
+
+
+        $(window).scroll(function() {
+            if(check == 1 && $(window).scrollTop() + $(window).height() == $(document).height()) {
+                if(xx >= 4)
+                    get_posts(xx - 4, xx + 1);
+                else
+                    get_posts(0, xx + 1);
+                if(change == 1) {
+                    xx = xx + 1;
+{#                    window.scrollTo(0, 300);#}
+                }
+            }
+            else if(check == 1 &&  $(window).scrollTop() + 100 < $("#Postup").offset().top){
+                if(xx >= 6)
+                    get_posts(xx - 6, xx - 1);
+                else
+                    get_posts(0, xx);
+                if(change == 1) {
+                    xx = xx - 1;
+{#                    window.scrollTo(0, 150);#}
+                }
+            }
+        });
+
+
+
+        function myrefresh() {
+            $('.ui.comments').hide();
+            $('.showComments').click( function(event) {
+                var blk = $(this).next().next();
+                if(blk.is(':visible')) {
+                    blk.hide('slow');
+                }
+                else {
+                    blk.show('slow');
+{#                    $("html, body").animate({ scrollTop: $(this).offset().top - 40 }, "slow");#}
+                }
+            });
+            $('.showLikes').click(function(event) {
+                var blk = $(this).next().next();
+                blk.modal("show");
+            });
+            $('.addComment').click(function(event){
+                var keep = this;
+                $.ajax({
+                    type: "POST",
+                    url: "/commentthis/",
+                    datatype: "json",
+                    data:{
+                        comment_post_id: keep.id,
+                        user: "{{ current_user }}",
+                        text: $(keep).prev().children().eq(0).val(),
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(json){
+                        var txt = $(keep).prev().children().eq(0).val();
+                        if(txt != "") {
+                            var dt = new Date($.now());
+                            var ttime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " in " + dt.getFullYear() + "." + dt.getMonth() + "." + dt.getDate();
+                            var blk = ('<div class="comment"> <a class="avatar"> <img src="{{ current_user.avatar.url }}"> </a> <div class="content"> <a class="author"> {{ current_user.username }} </a> <div class="metadata"> <span class="date">').concat(ttime, '</span> </div> <div class="text">').concat(txt, '</div></div></div>');
+                            $(keep).parent().before(blk);
+                            var cmn = $(keep).parent().parent().prev().prev().children().eq(0).html();
+                            var num = parseInt(cmn.split(' ')[0], 10);
+                            num ++;
+                            cmn = num + " Comments";
+                            $(keep).parent().parent().prev().prev().children().eq(0).html(cmn);
+                            $(keep).prev().children().eq(0).val("");
+                        }
+                    },
+                    error: function(json,errmsg,err){
+                    }
+                });
+                return false;
+            });
+            $('.likeThis').click(function(event){
+                var keep = this;
+                if($(keep).rating('get rating') == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/likethis/",
+                        datatype: "json",
+                        data:{
+                            user: "{{ current_user }}",
+                            l_post_id: keep.id,
+                            type: "remove",
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        },
+                        success: function(json){
+                            var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
+                            var num = parseInt(blk.split(' ')[0], 10);
+                            num --;
+                            blk = num + " Likes";
+                            $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
+                        }
+                    });
+                    return false;
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/likethis/",
+                        datatype: "json",
+                        data:{
+                            user: "{{ current_user }}",
+                            l_post_id: keep.id,
+                            type: "add",
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        },
+                        success: function(json){
+                            var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
+                            var num = parseInt(blk.split(' ')[0], 10);
+                            num ++;
+                            blk = num + " Likes";
+                            $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
+                        }
+                    });
+                    return false;
+                }
+            });
+            $('.ui.rating').rating();
+            $('#unfollow').hide();
+            $('.ui.modal').modal({
+                detachable: false
+            });
+            $('#follow').click(function(event){
+                $('#follow').hide();
+                $('#unfollow').show();
+            });
+            $('#unfollow').click(function(event){
+                $('#unfollow').hide();
+                $('#follow').show();
+            });
             $('.tooltip').tooltipster();
         	$('.postTitle').tooltipster({
             	content: $('<i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="star icon"></i><i class="empty star icon"></i>  ( 8.1 / 10 ) ' +
@@ -24,118 +350,7 @@
                 '<tr><td>Writers:</td> <td> <div class="ui list"> <div class="item"> Graham Moore </div> <div class="item"> Andrew Hodges </div> </div></td></tr>' +
                 '</tbody> </table>')
         	});
-        });
-        $('.ui.rating').rating();
-    	$('#unfollow').hide();
-        $('.ui.modal').modal({
-            detachable: false
-        });
-    	$('.ui.comments').hide();
-    	$('.showComments').click( function(event) {
-            var blk = $(this).next().next();
-        	if(blk.is(':visible')) {
-                blk.hide('slow');
-            }
-            else {
-                blk.show('slow');
-                $("html, body").animate({ scrollTop: $(this).offset().top - 40 }, "slow");
-            }
-        });
-    	$('.showLikes').click(function(event) {
-            var blk = $(this).next().next();
-            blk.modal("show");
-        });
-
-    	$('#follow').click(function(event){
-            $('#follow').hide();
-            $('#unfollow').show();
-        });
-    	$('#unfollow').click(function(event){
-            $('#unfollow').hide();
-            $('#follow').show();
-        });
-
-    	$('.addComment').click(function(event){
-            var keep = this;
-            $.ajax({
-                type: "POST",
-                url: "/commentthis/",
-                datatype: "json",
-                data:{
-                    comment_post_id: keep.id,
-                    user: "{{ current_user }}",
-                    text: $(keep).prev().children().eq(0).val(),
-                    csrfmiddlewaretoken: "{{ csrf_token }}"
-                },
-                success: function(json){
-                    var txt = $(keep).prev().children().eq(0).val();
-                    if(txt != "") {
-                        var dt = new Date($.now());
-                        var ttime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds() + " in " + dt.getFullYear() + "." + dt.getMonth() + "." + dt.getDate();
-                        var blk = ('<div class="comment"> <a class="avatar"> <img src="{{ current_user.avatar.url }}"> </a> <div class="content"> <a class="author"> {{ current_user.username }} </a> <div class="metadata"> <span class="date">').concat(ttime, '</span> </div> <div class="text">').concat(txt, '</div></div></div>');
-                        $(keep).parent().before(blk);
-                        var cmn = $(keep).parent().parent().prev().prev().children().eq(0).html();
-                        var num = parseInt(cmn.split(' ')[0], 10);
-                        num ++;
-                        cmn = num + " Comments";
-                        $(keep).parent().parent().prev().prev().children().eq(0).html(cmn);
-                        $(keep).prev().children().eq(0).val("");
-                    }
-                },
-                error: function(json,errmsg,err){
-                }
-            });
-            return false;
-        });
-    	$('.likeThis').click(function(event){
-            var keep = this;
-            if($(keep).rating('get rating') == 0) {
-                $.ajax({
-                    type: "POST",
-                    url: "/likethis/",
-                    datatype: "json",
-                    data:{
-                        user: "{{ current_user }}",
-                        l_post_id: keep.id,
-                        type: "remove",
-                        csrfmiddlewaretoken: "{{ csrf_token }}"
-                    },
-                    success: function(json){
-                        var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
-                        var num = parseInt(blk.split(' ')[0], 10);
-                        num --;
-                        blk = num + " Likes";
-                        $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
-                    },
-                    error: function(json,errmsg,err){
-                    }
-                });
-                return false;
-            }
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: "/likethis/",
-                    datatype: "json",
-                    data:{
-                        user: "{{ current_user }}",
-                        l_post_id: keep.id,
-                        type: "add",
-                        csrfmiddlewaretoken: "{{ csrf_token }}"
-                    },
-                    success: function(json){
-                        var blk = $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html();
-                        var num = parseInt(blk.split(' ')[0], 10);
-                        num ++;
-                        blk = num + " Likes";
-                        $(keep).parent().parent().children().eq(3).children().eq(2).children().eq(0).html(blk);
-                    },
-                    error: function(json,errmsg,err){
-                    }
-                });
-                return false;
-            }
-        });
+        }
     </script>
 {% endblock %}
 
@@ -145,112 +360,13 @@
     	<i class="comments outline icon"></i>
     	Posts
     </h2>
-    <hr/>
-	<div class="ui items">
-		{% for post in posts %}
-            <div class="item">
-                <div class="image">
-                    <img class="tooltip" src="{{ post.movie_name.cover.url }}">
-                </div>
-                <div class="content">
-                    <h2 class="header">
-                            <span class="postTitle">{{ post.movie_name }}</span>
-                            {% if post.userLike %}
-                                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
-                            {% else %}
-                                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
-                            {% endif %}
-                            <br/>
-                            {% for i in "02468" %}
-                                {% if post.rate >= i|add:"2" %}
-                                    <i class="star icon"></i>
-                                {% elif post.rate|add:"1" >= i|add:"2" %}
-                                    <i class="star half empty icon"></i>
-                                {% else %}
-                                    <i class="star empty icon"></i>
-                                {% endif %}
-                            {% endfor %}
-                            ({{ post.rate }} / 10)
-                    </h2>
-                    <div class="meta">
-                        <span><a href="/post/{{ post.id }}"> {{ post.date }} </a></span>
-                    </div>
-                    <div class="description">
-                        <p>
-                            {{ post.text }}
-                        </p>
-                    </div>
-                    <div class="extra">
-
-                        <div class="right floated author">
-                            <img class="ui avatar image" src="{{ post.owner.avatar.url }}">
-                            <a href = "/user_profile/{{ post.owner.username }}" > {{ post.owner.username }} </a>
-                        </div>
-
-                        <a class="showComments">
-                            <span>{{ post.cnums }} Comments</span>
-                            <i class ="icon comment"></i>
-                        </a>
-                        <a class="showLikes">
-                            <span>{{ post.lnums }} Likes</span>
-                            <i class="icon thumbs up"></i>
-                        </a>
-                        <!-- Comments -->
-                        <div class="ui comments">
-                            <br/>
-                            <h3 class="ui dividing header">Comments</h3>
-                            {% for comment in comments %}
-                                {% if comment.post == post %}
-                                    <div class="comment">
-                                        <a class="avatar"> <img src="{{ comment.user.avatar.url }}"> </a>
-                                        <div class="content">
-                                            <a class="author"> {{ comment.user.username }} </a> <div class="metadata"> <span class="date">{{ comment.date }}</span> </div>
-                                            <div class="text">
-                                                {{ comment.text }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            <form class="ui reply form">
-                                <div class="field">
-                                    <textarea></textarea>
-                                </div>
-                                <div id = "comment{{ post.id }}" class="ui blue labeled submit icon button addComment">
-                                    <i class="icon edit"></i> Add Reply
-                                </div>
-                            </form>
-                        </div>
-
-                        <!--- Likes -->
-                        <div class="ui small modal">
-                            <i class="close icon"></i>
-                            <div class="header">
-                                <i class="film icon"></i>
-                                {{ post.user.username }}'s Post Likes
-                            </div>
-                            <div class="content">
-                                <div class="ui divided list">
-                                {% for like in likes %}
-                                    {% if like.post == post %}
-                                        <div class="item">
-                                            <img class="ui avatar image" src="{{ like.user.avatar.url }}">
-                                            <div class="content">
-                                                <a class="header" href="/user_profile/{{ like.user.username }}/ ">{{ like.user.first_name }} {{ like.user.last_name }}</a>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                                </div>
-                            </div>
-                            <div class="actions">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr/>
-        {% endfor %}
+    <hr  id="Postup" />
+	<div id="showPosts" class="ui items">
+        Waiting ...
     </div>
+
+    <h1>
+        <i class="plus large icon"></i>
+    </h1>
 </article>
 {% endblock %}

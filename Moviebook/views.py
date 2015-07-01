@@ -112,12 +112,50 @@ def home(request):
     current_user = Guest.objects.get(username=request.user.username)
     base_elements = make_base(current_user)
 
+    if not request.method == "POST":
+        return render_to_response("home.html", {
+            'base_elements': base_elements,
+            'current_user': current_user
+        }, context_instance=RequestContext(request))
+        # return render(request, "home.html", {
+        #     'base_elements': base_elements,
+        #     'current_user': current_user,
+        # })
+
     flw = Follow.objects.filter(follower=current_user)
-    posts = Post.objects.filter(owner=current_user).order_by("-date")
+    ls = Post.objects.filter(owner=current_user).order_by("-date")
     for fw in flw:
-        posts = list(chain(posts, Post.objects.filter(owner = fw.following)))
+        ls = list(chain(ls, Post.objects.filter(owner = fw.following)))
 
+    ls.sort(key=lambda x: x.date, reverse=True)
+    print(len(ls))
+    for p in ls:
+        print(p.owner.username)
+    print("khar jan")
+    print(request.POST)
+    #     make Posts
+    xfrom = int(request.POST['xfrom'])
+    xto = int(request.POST['xto'])
+    if len(ls) < (xto - xfrom):
+        print("al of this")
+        posts = ls[:]
+    elif xfrom > len(ls):
+        print("iam hrerE222")
+        posts = ls[len(ls) - 5:]
+    elif xto > len(ls):
+        print("khar khar")
+        posts = ls[len(ls) - 5:]
+        print("an")
+    else:
+        print("iam hrerE333k2lk ")
+        posts = ls[xfrom:xto]
 
+    print(len(posts))
+    for p in posts:
+        print(p.owner.username)
+    print("dskhaljdksalkjd")
+
+    # make comments
     comments = []
     likes = []
     for i, p in enumerate(posts):
@@ -131,15 +169,30 @@ def home(request):
             posts[i].userLike = False
         else:
             posts[i].userLike = True
-        print(posts[i].userLike)
 
-    return render(request, "home.html", {
-        'base_elements': base_elements,
-        'posts': posts,
-        'current_user': current_user,
-        'comments': comments,
-        'likes': likes
+    comments.sort(key=lambda x: x.date, reverse=False)
+    print("khAli khari ")
+
+    for p in posts:
+        print(p.owner.username)
+    for p in comments:
+        print(p.user.username)
+    for p in likes:
+        print(p.user.username)
+
+    dt = Context({
+        "status": 1,
+        "posts": posts,
+        "comments": comments,
+        "likes": likes,
     })
+    template = loader.get_template("page.html")
+    print("bade home")
+
+    return HttpResponse(template.render(dt))
+    # return HttpResponse(json.dumps(dt), content_type="application/json", mimetype="application/json")
+    # return render_to_response('home.html', dt)
+    # return render_to_json_response
 
 def show_post(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -399,6 +452,42 @@ def settings(request):
         'form': form,
     })
 
+
+def get_options(request):
+    print("khar jaaaan")
+    if request.method == "POST":
+        ans = []
+        for us in Guest.objects.all():
+            ans.append(us.first_name)
+            ans.append(us.last_name)
+        for mv in Movie.objects.all():
+            ans.append(mv.name)
+
+        return HttpResponse(json.dumps(ans), content_type="application/json")
+
+
+@login_required(login_url='/login/')
+def search(request):
+    base_elements = make_base(request.user.username)
+    if request.method == "POST":
+        elem = request.POST['currency']
+        fmovies = Movie.objects.filter(Q(name=elem) | Q(director=elem))
+        for fm in fmovies:
+            fm.rate = fm.rate * 2
+        fusers = Guest.objects.filter(Q(username=elem) | Q(first_name=elem) | Q(last_name=elem))
+        for fu in fusers:
+            fl = Follow.objects.filter(following=fu)
+            fu.followers = []
+            for l in fl:
+                fu.followers.append( l.follower.username )
+            print(fu.followers)
+        current_user = Guest.objects.get(username=request.user.username)
+        return render(request, "search.html", {
+            'base_elements': base_elements,
+            'fmovies': fmovies,
+            'fusers': fusers,
+            'current_user': current_user
+        })
 
 #
 # def forgot(request, hash):

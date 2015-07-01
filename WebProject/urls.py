@@ -27,7 +27,6 @@ urlpatterns = patterns('',
     url(r'^followers/(\w+)/$', views.followers, name="user_followers"), #done
     url(r'^followings/(\w+)/$', views.followings, name="user_followings"), #done
     url(r'^movie_profile/(\w+)/$', views.movie_profile, name="movie_profile"), #done
-    url(r'^search/$', TemplateView.as_view(template_name='search.html'), name='search'),
     url(r'^logout/$', views.logout_view , name='logout'), #done
     url(r'^follow/$', views.follow, name= 'follow'), #done
     url(r'^unfollow/$', views.unfollow, name= 'unfollow'), #done
@@ -37,6 +36,8 @@ urlpatterns = patterns('',
     url(r'^clearnotif/$', views.clear_notif, name= 'clearnotif'), #done
     url(r'^settings/$', views.settings , name='settings'), #done
     url(r'^newpassword/$', views.send_new_password, name="sendnewpass"),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^getalloptions/$', views.get_options, name= 'options'),
 
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
     # url(r'^forgot/(?P<hash>\w+)/$', views.forgot, name='forgot_password'),

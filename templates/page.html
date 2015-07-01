@@ -1,0 +1,103 @@
+{% for post in posts %}<div class="item">
+<div class="image">
+    <img class="tooltip" src="{{ post.movie_name.cover.url }}">
+</div>
+<div class="content">
+    <h2 class="header">
+            <span class="postTitle">{{ post.movie_name }}</span>
+            {% if post.userLike %}
+                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="1" data-max-rating="1"></div>
+            {% else %}
+                <div id = "like{{ post.id }}" class="ui huge heart rating likeThis" data-rating="0" data-max-rating="1"></div>
+            {% endif %}
+            <br/>
+            {% for i in "02468" %}
+                {% if post.rate >= i|add:"2" %}
+                    <i class="star icon"></i>
+                {% elif post.rate|add:"1" >= i|add:"2" %}
+                    <i class="star half empty icon"></i>
+                {% else %}
+                    <i class="star empty icon"></i>
+                {% endif %}
+            {% endfor %}
+            ({{ post.rate }} / 10)
+    </h2>
+    <div class="meta">
+        <span><a href="/post/{{ post.id }}"> {{ post.date }} </a></span>
+    </div>
+    <div class="description">
+        <p>
+            {{ post.text }}
+        </p>
+    </div>
+    <div class="extra">
+
+        <div class="right floated author">
+            <img class="ui avatar image" src="{{ post.owner.avatar.url }}">
+            <a href = "/user_profile/{{ post.owner.username }}" > {{ post.owner.username }} </a>
+        </div>
+
+        <a class="showComments">
+            <span>{{ post.cnums }} Comments</span>
+            <i class ="icon comment"></i>
+        </a>
+        <a class="showLikes">
+            <span>{{ post.lnums }} Likes</span>
+            <i class="icon thumbs up"></i>
+        </a>
+        <!-- Comments -->
+        <div class="ui comments">
+            <br/>
+            <h3 class="ui dividing header">Comments</h3>
+            {% for comment in comments %}
+                {% if comment.post == post %}
+                    <div class="comment">
+                        <a class="avatar"> <img src="{{ comment.user.avatar.url }}"> </a>
+                        <div class="content">
+                            <a class="author"> {{ comment.user.username }} </a> <div class="metadata"> <span class="date">{{ comment.date }}</span> </div>
+                            <div class="text">
+                                {{ comment.text }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <form class="ui reply form">
+                <div class="field">
+                    <textarea></textarea>
+                </div>
+                <div id = "comment{{ post.id }}" class="ui blue labeled submit icon button addComment">
+                    <i class="icon edit"></i> Add Reply
+                </div>
+            </form>
+        </div>
+
+        <!--- Likes -->
+        <div class="ui small modal">
+            <i class="close icon"></i>
+            <div class="header">
+                <i class="film icon"></i>
+                {{ post.user.username }}'s Post Likes
+            </div>
+            <div class="content">
+                <div class="ui divided list">
+                {% for like in likes %}
+                    {% if like.post == post %}
+                        <div class="item">
+                            <img class="ui avatar image" src="{{ like.user.avatar.url }}">
+                            <div class="content">
+                                <a class="header" href="/user_profile/{{ like.user.username }}/ ">{{ like.user.first_name }} {{ like.user.last_name }}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<hr/>
+{% endfor %}
